@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>*{box-sizing:border-box}</style>
+</helmet>
+<div style="{{ vars }}">
+<div style="width:1280px;height:960px;background:var(--cv);color:var(--ink);font-family:'General Sans','Satoshi',system-ui,sans-serif;border:1px solid var(--hl);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
+
+  <div style="height:56px;flex:none;border-bottom:1px solid var(--hl);background:var(--sf);display:flex;align-items:center;justify-content:space-between;padding:0 40px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:20px;height:20px;border-radius:6px;border:1.5px solid var(--ink);display:grid;place-items:center"><div style="width:7px;height:7px;border-radius:999px;background:var(--ac)"></div></div>
+      <div style="font-family:Fraunces,Georgia,serif;font-size:17px;letter-spacing:-.01em">Rubric</div>
+      <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec);padding-left:6px">QSTP Summer 2026 internships</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Progress saved automatically</div>
+      <div style="width:110px;height:5px;border-radius:999px;background:var(--skl);overflow:hidden"><div style="width:{{ progress }};height:5px;border-radius:999px;background:var(--ac)"></div></div>
+    </div>
+  </div>
+
+  <div style="flex:1;overflow:hidden;display:flex;justify-content:center;padding:44px 40px 0">
+    <div style="width:100%;max-width:680px;display:flex;flex-direction:column;gap:36px">
+
+      <div style="display:flex flex-direction:column">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="height:26px;padding:0 10px;border-radius:999px;background:var(--gsf);color:var(--grn);font:500 12px/26px 'General Sans',system-ui">Accepting applications</div>
+            <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Closes 14 August · 6–8 minutes</div>
+          </div>
+          <div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1.05;letter-spacing:-.025em">Machine Learning Intern</div>
+          <div style="font:400 16px/1.6 'General Sans',system-ui;color:var(--sec);max-width:64ch">Sadeem Robotics · Qatar Science &amp; Technology Park · Full-time, 10 weeks, on-site in Doha. You will own one perception model end to end, from field data collection to evaluation on real inspection footage.</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:2px">
+            <div style="height:28px;padding:0 11px;border-radius:999px;border:1px solid var(--hl);font:500 12px/26px 'General Sans',system-ui;color:var(--sec)">Python</div>
+            <div style="height:28px;padding:0 11px;border-radius:999px;border:1px solid var(--hl);font:500 12px/26px 'General Sans',system-ui;color:var(--sec)">PyTorch or TensorFlow</div>
+            <div style="height:28px;padding:0 11px;border-radius:999px;border:1px solid var(--hl);font:500 12px/26px 'General Sans',system-ui;color:var(--sec)">Linear algebra coursework</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--hl)"></div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">About you</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Full name <span style="color:var(--red)">*</span></div>
+            <div style="height:44px;border-radius:10px;border:1px solid {{ f1bd }};background:var(--sf);padding:0 13px;font:400 15px/42px 'General Sans',system-ui;color:{{ f1fg }};box-shadow:{{ f1sh }}">{{ f1 }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Email address <span style="color:var(--red)">*</span></div>
+            <div style="height:44px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 13px;font:400 15px/42px 'General Sans',system-ui;color:{{ f2fg }}">{{ f2 }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">University &amp; programme <span style="color:var(--red)">*</span></div>
+            <div style="height:44px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 13px;font:400 15px/42px 'General Sans',system-ui;color:{{ f3fg }}">{{ f3 }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Expected graduation <span style="color:var(--red)">*</span></div>
+            <div style="height:44px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 13px;display:flex;align-items:center;justify-content:space-between"><div style="font:400 15px/1 'General Sans',system-ui;color:{{ f4fg }}">{{ f4 }}</div><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="font:500 13px/1 'General Sans',system-ui">Portfolio or GitHub <span style="color:var(--sec);font-weight:400">— optional</span></div>
+          <div style="height:44px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 13px;font:400 15px/42px 'General Sans',system-ui;color:{{ f5fg }}">{{ f5 }}</div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--hl)"></div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">Documents</div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">PDF or DOCX · 5 MB max</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="font:500 13px/1 'General Sans',system-ui">Resume <span style="color:var(--red)">*</span></div>
+          <div style="border:{{ dz1border }};border-radius:14px;background:{{ dz1bg }};padding:{{ dz1pad }};display:flex;align-items:center;gap:14px;box-shadow:{{ dz1sh }}">
+            <div style="width:40px;height:40px;flex:none;border-radius:10px;background:{{ dz1iconBg }};display:grid;place-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{ dz1iconFg }}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path></svg></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px;min-width:0">
+              <div style="font:500 14px/1.3 'General Sans',system-ui;color:{{ dz1titleFg }}">{{ dz1title }}</div>
+              <div style="font:400 13px/1.4 'General Sans',system-ui;color:var(--sec)">{{ dz1sub }}</div>
+            </div>
+            <div style="height:34px;padding:0 14px;border-radius:10px;background:{{ dz1btnBg }};border:1px solid {{ dz1btnBd }};color:{{ dz1btnFg }};font:500 13px/32px 'General Sans',system-ui;flex:none">{{ dz1btn }}</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="font:500 13px/1 'General Sans',system-ui">Cover letter <span style="color:var(--sec);font-weight:400">— optional, but read closely</span></div>
+          <div style="border:1px dashed var(--hl);border-radius:14px;padding:18px;display:flex;align-items:center;gap:14px">
+            <div style="width:40px;height:40px;flex:none;border-radius:10px;background:var(--skl);display:grid;place-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"></path><path d="m4 7 8 6 8-6"></path></svg></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px">
+              <div style="font:500 14px/1.3 'General Sans',system-ui;color:var(--sec)">Drop a cover letter, or write it here</div>
+              <div style="font:400 13px/1.4 'General Sans',system-ui;color:var(--sec)">Your own words matter more than polish — we read for specifics.</div>
+            </div>
+            <div style="height:34px;padding:0 14px;border-radius:10px;border:1px solid var(--hl);color:var(--ink);font:500 13px/32px 'General Sans',system-ui;flex:none">Browse</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:var(--hl)"></div>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between">
+          <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">Screening questions</div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">All three required</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:baseline;gap:10px"><div style="font:400 13px/1.5 ui-monospace,Menlo,monospace;color:var(--sec)">01</div><div style="font:500 15px/1.5 'General Sans',system-ui">Describe a model you trained end to end. What did you change after the first evaluation? <span style="color:var(--red)">*</span></div></div>
+          <div style="min-height:{{ q1h }};border-radius:10px;border:1px solid {{ q1bd }};background:var(--sf);padding:13px;font:400 15px/1.6 'General Sans',system-ui;color:{{ q1fg }};box-shadow:{{ q1sh }}">{{ q1 }}</div>
+          <div style="display:flex;justify-content:space-between;font:400 12px/1 'General Sans',system-ui;color:var(--sec)"><div>200 words max</div><div>{{ q1count }}</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:baseline;gap:10px"><div style="font:400 13px/1.5 ui-monospace,Menlo,monospace;color:var(--sec)">02</div><div style="font:500 15px/1.5 'General Sans',system-ui">Which parts of a perception pipeline have you worked on? <span style="color:var(--red)">*</span></div></div>
+          <div style="display:flex;gap:10px;padding-left:32px">
+            <div style="height:36px;padding:0 14px;border-radius:999px;background:{{ o1bg }};border:1px solid {{ o1bd }};color:{{ o1fg }};font:500 13px/34px 'General Sans',system-ui">Data collection</div>
+            <div style="height:36px;padding:0 14px;border-radius:999px;background:{{ o2bg }};border:1px solid {{ o2bd }};color:{{ o2fg }};font:500 13px/34px 'General Sans',system-ui">Training</div>
+            <div style="height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--hl);color:var(--sec);font:500 13px/34px 'General Sans',system-ui">Deployment</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:baseline;gap:10px"><div style="font:400 13px/1.5 ui-monospace,Menlo,monospace;color:var(--sec)">03</div><div style="font:500 15px/1.5 'General Sans',system-ui">Are you available on-site in Doha for the full 10 weeks? <span style="color:var(--red)">*</span></div></div>
+          <div style="display:flex;gap:10px;padding-left:32px">
+            <div style="height:36px;padding:0 18px;border-radius:999px;background:{{ y1bg }};border:1px solid {{ y1bd }};color:{{ y1fg }};font:500 13px/34px 'General Sans',system-ui">Yes</div>
+            <div style="height:36px;padding:0 18px;border-radius:999px;border:1px solid var(--hl);color:var(--sec);font:500 13px/34px 'General Sans',system-ui">No</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--hl);padding:20px 0 40px;display:flex;align-items:center;justify-content:space-between;gap:20px">
+        <div style="font:400 12px/1.6 'General Sans',system-ui;color:var(--sec);max-width:46ch">Your application is shared with QSTP host startups in this cohort only. Written answers are checked for AI authorship.</div>
+        <div style="display:flex;align-items:center;gap:12px;flex:none">
+          <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">{{ footNote }}</div>
+          <div style="height:44px;padding:0 22px;border-radius:10px;background:{{ submitBg }};color:{{ submitFg }};font:500 15px/44px 'General Sans',system-ui">Submit application</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:960},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;empty&quot;,&quot;dropping&quot;,&quot;filled&quot;],&quot;default&quot;:&quot;empty&quot;,&quot;tsType&quot;:&quot;'empty'|'dropping'|'filled'&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const state = this.props.state || 'empty';
+    const v = dark ? {
+      '--cv':'#0E0E11','--sf':'#17171B','--el':'#1E1E24','--ink':'#F4F4F2','--sec':'#A0A0A8',
+      '--hl':'rgba(255,255,255,0.09)','--ac':'#6B82FF','--acs':'rgba(107,130,255,0.14)',
+      '--sh':'0 8px 28px -14px rgba(0,0,0,0.75)','--skl':'rgba(255,255,255,0.07)',
+      '--grn':'#3FBF87','--gsf':'rgba(63,191,135,0.14)','--red':'#E0655A'
+    } : {
+      '--cv':'#FAFAF7','--sf':'#FFFFFF','--el':'#FFFFFF','--ink':'#16161A','--sec':'#6B6B72',
+      '--hl':'rgba(0,0,0,0.08)','--ac':'#2743E0','--acs':'rgba(39,67,224,0.08)',
+      '--sh':'0 6px 24px -12px rgba(22,22,26,0.16)','--skl':'rgba(22,22,26,0.06)',
+      '--grn':'#1F8A5B','--gsf':'rgba(31,138,91,0.10)','--red':'#C0392F'
+    };
+    const filled = state === 'filled' || state === 'dropping';
+    const dropping = state === 'dropping';
+    const ph = v['--sec'];
+    const answer = 'I trained a small YOLO variant to spot corrosion on pipe welds from 3,400 phone photos. First evaluation looked fine at 0.82 mAP but failed on overcast days, so I rebalanced the set by lighting condition and added exposure jitter. Recall on the overcast slice went from 0.51 to 0.79.';
+    return {
+      vars: v,
+      progress: filled ? '86%' : '18%',
+      f1: filled ? 'Layla Al-Mansouri' : 'Your full name',
+      f1fg: filled ? v['--ink'] : ph,
+      f1bd: state === 'empty' ? v['--ac'] : v['--hl'],
+      f1sh: state === 'empty' ? '0 0 0 3px ' + v['--acs'] : 'none',
+      f2: filled ? 'layla.almansouri@qu.edu.qa' : 'you@university.edu',
+      f2fg: filled ? v['--ink'] : ph,
+      f3: filled ? 'Qatar University — BSc Computer Science' : 'University and programme',
+      f3fg: filled ? v['--ink'] : ph,
+      f4: filled ? 'June 2027' : 'Select a term',
+      f4fg: filled ? v['--ink'] : ph,
+      f5: filled ? 'github.com/laylaam' : 'https://',
+      f5fg: filled ? v['--ink'] : ph,
+      dz1border: dropping ? '1.5px solid ' + v['--ac'] : (filled ? '1px solid ' + v['--hl'] : '1px dashed ' + v['--hl']),
+      dz1bg: dropping ? v['--acs'] : (filled ? v['--sf'] : 'transparent'),
+      dz1pad: dropping ? '17.5px' : '18px',
+      dz1sh: dropping ? v['--sh'] : 'none',
+      dz1iconBg: filled ? v['--gsf'] : (dropping ? v['--ac'] : v['--skl']),
+      dz1iconFg: filled ? v['--grn'] : (dropping ? '#fff' : v['--sec']),
+      dz1title: dropping ? 'Release to upload al-mansouri-cv.pdf' : (filled ? 'al-mansouri-cv.pdf' : 'Drop your resume here'),
+      dz1titleFg: filled || dropping ? v['--ink'] : v['--sec'],
+      dz1sub: dropping ? 'One file · replaces nothing' : (filled ? '412 KB · uploaded · parsed for skills' : 'or browse — required to submit'),
+      dz1btn: filled ? 'Replace' : 'Browse',
+      dz1btnBg: filled ? 'transparent' : (dropping ? v['--ac'] : 'transparent'),
+      dz1btnBd: filled || !dropping ? v['--hl'] : 'transparent',
+      dz1btnFg: dropping ? '#fff' : v['--ink'],
+      q1: filled ? answer : 'Be specific — what broke, and what you did about it.',
+      q1fg: filled ? v['--ink'] : ph,
+      q1h: filled ? '112px' : '96px',
+      q1bd: filled ? v['--hl'] : v['--hl'],
+      q1sh: 'none',
+      q1count: filled ? '62 / 200 words' : '0 / 200 words',
+      o1bg: filled ? v['--acs'] : 'transparent',
+      o1fg: filled ? v['--ac'] : v['--sec'],
+      o1bd: filled ? v['--ac'] : v['--hl'],
+      o2bg: filled ? v['--acs'] : 'transparent',
+      o2fg: filled ? v['--ac'] : v['--sec'],
+      o2bd: filled ? v['--ac'] : v['--hl'],
+      y1bg: filled ? v['--acs'] : 'transparent',
+      y1fg: filled ? v['--ac'] : v['--sec'],
+      y1bd: filled ? v['--ac'] : v['--hl'],
+      submitBg: filled ? v['--ac'] : v['--acs'],
+      submitFg: filled ? '#fff' : (dark ? 'rgba(107,130,255,0.5)' : 'rgba(39,67,224,0.45)'),
+      footNote: filled ? 'Ready to submit' : '4 required fields left'
+    };
+  }
+}
+</script>
+</body>
+</html>

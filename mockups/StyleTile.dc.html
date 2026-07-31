@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>
+*{box-sizing:border-box}
+</style>
+</helmet>
+<div style="{{ vars }}">
+<div style="width:1280px;min-height:1640px;background:var(--cv);color:var(--ink);font-family:'General Sans','Satoshi',system-ui,sans-serif;padding:56px 64px 64px;border:1px solid var(--hl);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;gap:48px">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--hl);padding-bottom:24px">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="font:500 12px/1 'General Sans',system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--sec)">Rubric — Design System</div>
+      <div style="font-family:Fraunces,Georgia,serif;font-size:40px;font-weight:400;letter-spacing:-.02em;line-height:1">The living rubric</div>
+    </div>
+    <div style="font:400 14px/1.5 'General Sans',system-ui;color:var(--sec);text-align:right">{{ themeLabel }}<br>v1.0 · 4/8pt grid</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px">
+    <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">01 — Color tokens</div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:16px">
+      <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="height:72px;border-radius:10px;border:1px solid var(--hl);background:{{ s.hex }}"></div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <div style="font:500 13px/1 'General Sans',system-ui">{{ s.name }}</div>
+            <div style="font:400 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--sec)">{{ s.hex }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding-top:8px">
+      <sc-for list="{{ scale }}" as="s" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="height:44px;border-radius:10px;border:1px solid var(--hl);background:{{ s.hex }}"></div>
+          <div style="font:500 12px/1.3 'General Sans',system-ui">{{ s.name }}<div style="font:400 11px/1.4 ui-monospace,Menlo,monospace;color:var(--sec)">{{ s.hex }}</div></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">02 — Type scale</div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">56 / Fr</div><div style="font-family:Fraunces,Georgia,serif;font-size:56px;line-height:1;letter-spacing:-.03em">Shortlist</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">40 / Fr</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.02em">Match pool</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">28 / Fr</div><div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.1;letter-spacing:-.02em">Ranked candidates</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">20 / GS</div><div style="font:500 20px/1.3 'General Sans',system-ui;letter-spacing:-.01em">Section heading, 20/26 medium</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">16 / GS</div><div style="font:400 16px/1.5 'General Sans',system-ui">Body copy sits at 16/24 regular with a 68ch column.</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">14 / GS</div><div style="font:400 14px/1.45 'General Sans',system-ui;color:var(--sec)">Secondary / meta text, 14/20</div></div>
+        <div style="display:flex;align-items:baseline;gap:20px"><div style="width:76px;font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">12 / GS</div><div style="font:500 12px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Eyebrow label · 12 caps</div></div>
+      </div>
+      <div style="font:400 13px/1.6 'General Sans',system-ui;color:var(--sec);border-top:1px solid var(--hl);padding-top:16px">Fraunces is display only — headlines, big numbers, dial values. General Sans (fallback Satoshi) carries every piece of UI chrome. Tracking tightens to −0.02em at 28px and above.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">03 — Buttons</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--ac);color:#fff;font:500 14px/40px 'General Sans',system-ui">Publish role</div>
+          <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--acHover);color:#fff;font:500 14px/40px 'General Sans',system-ui;box-shadow:var(--sh)">Publish role</div>
+          <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--ac);color:#fff;font:500 14px/40px 'General Sans',system-ui;outline:2px solid var(--ac);outline-offset:2px">Focus</div>
+          <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--acs);color:var(--acDim);font:500 14px/40px 'General Sans',system-ui">Disabled</div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--sf);border:1px solid var(--hl);color:var(--ink);font:500 14px/38px 'General Sans',system-ui">Secondary</div>
+          <div style="height:40px;padding:0 18px;border-radius:10px;color:var(--ink);font:500 14px/40px 'General Sans',system-ui">Ghost</div>
+          <div style="height:32px;padding:0 14px;border-radius:999px;background:var(--sf);border:1px solid var(--hl);color:var(--sec);font:500 13px/30px 'General Sans',system-ui">Pill · small</div>
+          <div style="height:32px;padding:0 14px;border-radius:999px;background:var(--ac);color:#fff;font:500 13px/32px 'General Sans',system-ui">Pill · active</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">04 — Inputs</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="font:500 12px/1 'General Sans',system-ui;color:var(--sec)">Default</div><div style="height:40px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px;font:400 14px/38px 'General Sans',system-ui;color:var(--sec)">Machine Learning Intern</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="font:500 12px/1 'General Sans',system-ui;color:var(--sec)">Focus</div><div style="height:40px;border-radius:10px;border:1px solid var(--ac);background:var(--sf);padding:0 12px;font:400 14px/38px 'General Sans',system-ui;box-shadow:0 0 0 3px var(--acs)">Machine Learning Intern<span style="color:var(--ac)">|</span></div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="font:500 12px/1 'General Sans',system-ui;color:var(--sec)">Error</div><div style="height:40px;border-radius:10px;border:1px solid var(--red);background:var(--sf);padding:0 12px;font:400 14px/38px 'General Sans',system-ui;color:var(--ink)">—</div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--red)">A public title is required</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="font:500 12px/1 'General Sans',system-ui;color:var(--sec)">Disabled</div><div style="height:40px;border-radius:10px;border:1px solid var(--hl);background:var(--skl);padding:0 12px;font:400 14px/38px 'General Sans',system-ui;color:var(--sec)">Locked after publish</div></div>
+        </div>
+        <div style="display:flex;gap:20px;align-items:center;padding-top:4px">
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:24px;border-radius:999px;background:var(--ac);position:relative"><div style="position:absolute;top:3px;left:19px;width:18px;height:18px;border-radius:999px;background:#fff"></div></div><div style="font:400 14px/1 'General Sans',system-ui">On</div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:24px;border-radius:999px;background:var(--skl);border:1px solid var(--hl);position:relative"><div style="position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:999px;background:var(--sec)"></div></div><div style="font:400 14px/1 'General Sans',system-ui;color:var(--sec)">Off</div></div>
+          <div style="display:flex;align-items:center;gap:10px"><div style="width:18px;height:18px;border-radius:6px;background:var(--ac);display:grid;place-items:center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div><div style="font:400 14px/1 'General Sans',system-ui">Checkbox</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:340px 1fr;gap:48px;border-top:1px solid var(--hl);padding-top:40px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">05 — Score dial</div>
+      <div style="display:flex;align-items:flex-end;gap:28px">
+        <div style="position:relative;width:88px;height:88px">
+          <svg width="88" height="88" viewBox="0 0 88 88" style="transform:rotate(-90deg)"><circle cx="44" cy="44" r="39" fill="none" stroke="var(--hl)" stroke-width="6"></circle><circle cx="44" cy="44" r="39" fill="none" stroke="var(--ac)" stroke-width="6" stroke-linecap="round" stroke-dasharray="245" stroke-dashoffset="27"></circle></svg>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:28px;letter-spacing:-.02em">89</div>
+        </div>
+        <div style="position:relative;width:56px;height:56px">
+          <svg width="56" height="56" viewBox="0 0 56 56" style="transform:rotate(-90deg)"><circle cx="28" cy="28" r="24" fill="none" stroke="var(--hl)" stroke-width="4"></circle><circle cx="28" cy="28" r="24" fill="none" stroke="var(--ac)" stroke-width="4" stroke-linecap="round" stroke-dasharray="151" stroke-dashoffset="45"></circle></svg>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:17px">70</div>
+        </div>
+        <div style="position:relative;width:36px;height:36px">
+          <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="47"></circle></svg>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:12px">50</div>
+        </div>
+        <div style="position:relative;width:36px;height:36px">
+          <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle></svg>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font:400 12px/1 ui-monospace,Menlo,monospace;color:var(--sec)">—</div>
+        </div>
+      </div>
+      <div style="font:400 13px/1.6 'General Sans',system-ui;color:var(--sec)">Track = hairline. Arc = accent, round cap, starts at 12 o'clock, sweeps clockwise. Value in Fraunces, optically centered. Empty state keeps the track and shows an em-dash.</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">06 — Authenticity badge scale (% AI-written)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <sc-for list="{{ auth }}" as="a" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:132px">
+            <div style="display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:{{ a.bg }};border:1px solid {{ a.bd }};width:fit-content">
+              <div style="width:7px;height:7px;border-radius:999px;background:{{ a.fg }}"></div>
+              <div style="font:500 13px/1 'General Sans',system-ui;color:{{ a.fg }}">{{ a.pct }}</div>
+            </div>
+            <div style="font:400 12px/1.4 'General Sans',system-ui;color:var(--sec)">{{ a.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="height:10px;border-radius:999px;background:linear-gradient(90deg,var(--grn),var(--amb),var(--red))"></div>
+      <div style="display:flex;justify-content:space-between;font:400 12px/1 'General Sans',system-ui;color:var(--sec)"><div>0% · human</div><div>50% · mixed</div><div>100% · AI</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:8px">
+        <div style="height:26px;padding:0 10px;border-radius:999px;background:var(--acs);color:var(--ac);font:500 12px/26px 'General Sans',system-ui">Shortlisted</div>
+        <div style="height:26px;padding:0 10px;border-radius:999px;background:var(--skl);color:var(--sec);font:500 12px/26px 'General Sans',system-ui">New today</div>
+        <div style="height:26px;padding:0 10px;border-radius:999px;border:1px solid var(--hl);color:var(--sec);font:500 12px/24px 'General Sans',system-ui">Cover letter</div>
+        <div style="height:26px;padding:0 10px;border-radius:999px;background:var(--rsf);color:var(--red);font:500 12px/26px 'General Sans',system-ui">Flagged</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--hl);padding-top:40px">
+    <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">07 — Cards, rows, empty & skeleton</div>
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:32px;align-items:start">
+      <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);box-shadow:var(--sh);padding:24px;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font:500 17px/1.2 'General Sans',system-ui;letter-spacing:-.01em">Machine Learning Intern</div>
+            <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Sadeem Robotics · QSTP</div>
+          </div>
+          <div style="height:24px;padding:0 9px;border-radius:999px;background:var(--gsf);color:var(--grn);font:500 12px/24px 'General Sans',system-ui">Live</div>
+        </div>
+        <div style="display:flex;gap:28px">
+          <div><div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1;letter-spacing:-.02em">148</div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-top:6px">Applicants</div></div>
+          <div><div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1;letter-spacing:-.02em">96</div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-top:6px">Cover letters</div></div>
+          <div><div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1;letter-spacing:-.02em;color:var(--ac)">12</div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-top:6px">New today</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;border:1px solid var(--hl);border-radius:14px;background:var(--sf);overflow:hidden">
+        <div style="display:grid;grid-template-columns:56px 1fr 120px 96px;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hl);font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)"><div>Fit</div><div>Candidate</div><div>Authenticity</div><div>State</div></div>
+        <div style="display:grid;grid-template-columns:56px 1fr 120px 96px;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hl)">
+          <div style="position:relative;width:36px;height:36px"><svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="9"></circle></svg><div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:12px">91</div></div>
+          <div style="font:500 14px/1 'General Sans',system-ui">Layla Al-Mansouri</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:var(--gsf);width:fit-content"><div style="width:6px;height:6px;border-radius:999px;background:var(--grn)"></div><div style="font:500 12px/1 'General Sans',system-ui;color:var(--grn)">4%</div></div>
+          <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Default</div>
+        </div>
+        <div style="display:grid;grid-template-columns:56px 1fr 120px 96px;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hl);background:var(--rowHover)">
+          <div style="position:relative;width:36px;height:36px"><svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="16"></circle></svg><div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:12px">83</div></div>
+          <div style="font:500 14px/1 'General Sans',system-ui">Omar Haddad</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:var(--asf);width:fit-content"><div style="width:6px;height:6px;border-radius:999px;background:var(--amb)"></div><div style="font:500 12px/1 'General Sans',system-ui;color:var(--amb)">46%</div></div>
+          <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Hover</div>
+        </div>
+        <div style="display:grid;grid-template-columns:56px 1fr 120px 96px;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--hl);background:var(--acs);box-shadow:inset 2px 0 0 var(--ac)">
+          <div style="position:relative;width:36px;height:36px"><svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="23"></circle></svg><div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:12px">76</div></div>
+          <div style="font:500 14px/1 'General Sans',system-ui">Priya Raghunathan</div>
+          <div style="display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:var(--rsf);width:fit-content"><div style="width:6px;height:6px;border-radius:999px;background:var(--red)"></div><div style="font:500 12px/1 'General Sans',system-ui;color:var(--red)">88%</div></div>
+          <div style="font:400 13px/1 'General Sans',system-ui;color:var(--ac)">Selected</div>
+        </div>
+        <div style="display:grid;grid-template-columns:56px 1fr 120px 96px;gap:16px;align-items:center;padding:14px 20px">
+          <div style="width:36px;height:36px;border-radius:999px;background:var(--skl)"></div>
+          <div style="height:12px;width:190px;border-radius:999px;background:var(--skl)"></div>
+          <div style="height:26px;width:76px;border-radius:999px;background:var(--skl)"></div>
+          <div style="height:12px;width:56px;border-radius:999px;background:var(--skl)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;padding-top:8px">
+      <div style="border:1px dashed var(--hl);border-radius:14px;padding:40px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+        <div style="width:44px;height:44px;border-radius:999px;border:1px solid var(--hl);display:grid;place-items:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.3-4.3"></path></svg></div>
+        <div style="font-family:Fraunces,Georgia,serif;font-size:20px;line-height:1.2">No candidates above 60 fit</div>
+        <div style="font:400 14px/1.5 'General Sans',system-ui;color:var(--sec);max-width:38ch">Lower the fit floor or widen the authenticity threshold to bring rows back into the pool.</div>
+        <div style="height:36px;padding:0 16px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);font:500 13px/34px 'General Sans',system-ui;margin-top:4px">Reset filters</div>
+      </div>
+      <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);padding:24px;display:flex;flex-direction:column;gap:16px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Skeleton — 3 shimmer bands, 60ms stagger</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:36px;height:36px;border-radius:999px;background:var(--skl)"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:11px;width:52%;border-radius:999px;background:var(--skl)"></div><div style="height:9px;width:30%;border-radius:999px;background:var(--skl);opacity:.7"></div></div><div style="height:26px;width:64px;border-radius:999px;background:var(--skl)"></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:36px;height:36px;border-radius:999px;background:var(--skl);opacity:.8"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:11px;width:44%;border-radius:999px;background:var(--skl);opacity:.8"></div><div style="height:9px;width:26%;border-radius:999px;background:var(--skl);opacity:.55"></div></div><div style="height:26px;width:64px;border-radius:999px;background:var(--skl);opacity:.8"></div></div>
+          <div style="display:flex;gap:14px;align-items:center"><div style="width:36px;height:36px;border-radius:999px;background:var(--skl);opacity:.6"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div style="height:11px;width:38%;border-radius:999px;background:var(--skl);opacity:.6"></div><div style="height:9px;width:22%;border-radius:999px;background:var(--skl);opacity:.4"></div></div><div style="height:26px;width:64px;border-radius:999px;background:var(--skl);opacity:.6"></div></div>
+        </div>
+        <div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec);border-top:1px solid var(--hl);padding-top:12px">Never a spinner. Bands hold the exact height of the real row so nothing jumps on swap.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:1640},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const light = {
+      '--cv':'#FAFAF7','--sf':'#FFFFFF','--el':'#FFFFFF','--ink':'#16161A','--sec':'#6B6B72',
+      '--hl':'rgba(0,0,0,0.08)','--ac':'#2743E0','--acHover':'#1C33BE','--acDim':'rgba(39,67,224,0.45)',
+      '--acs':'rgba(39,67,224,0.08)','--sh':'0 6px 24px -12px rgba(22,22,26,0.16)',
+      '--skl':'rgba(22,22,26,0.06)','--rowHover':'rgba(22,22,26,0.03)',
+      '--grn':'#1F8A5B','--amb':'#B87514','--red':'#C0392F',
+      '--gsf':'rgba(31,138,91,0.10)','--asf':'rgba(184,117,20,0.12)','--rsf':'rgba(192,57,47,0.10)'
+    };
+    const darkVars = {
+      '--cv':'#0E0E11','--sf':'#17171B','--el':'#1E1E24','--ink':'#F4F4F2','--sec':'#A0A0A8',
+      '--hl':'rgba(255,255,255,0.09)','--ac':'#6B82FF','--acHover':'#8496FF','--acDim':'rgba(107,130,255,0.45)',
+      '--acs':'rgba(107,130,255,0.14)','--sh':'0 8px 28px -14px rgba(0,0,0,0.75)',
+      '--skl':'rgba(255,255,255,0.07)','--rowHover':'rgba(255,255,255,0.04)',
+      '--grn':'#3FBF87','--amb':'#E0A63C','--red':'#E0655A',
+      '--gsf':'rgba(63,191,135,0.14)','--asf':'rgba(224,166,60,0.16)','--rsf':'rgba(224,101,90,0.14)'
+    };
+    const v = dark ? darkVars : light;
+    const sw = [
+      ['Canvas', v['--cv']], ['Surface', v['--sf']], ['Elevated', v['--el']],
+      ['Ink', v['--ink']], ['Secondary', v['--sec']], ['Accent', v['--ac']]
+    ];
+    const sc = [
+      ['Human', v['--grn']], ['Low-mixed', dark ? '#9CBF5C' : '#7E8C3A'], ['Mixed', v['--amb']],
+      ['High-mixed', dark ? '#E4834A' : '#C2612A'], ['AI', v['--red']]
+    ];
+    const auth = [
+      { pct:'4%', label:'0–15 · Human voice', fg:v['--grn'], bg:v['--gsf'], bd:'transparent' },
+      { pct:'22%', label:'16–35 · Mostly human', fg:dark?'#9CBF5C':'#6F7D33', bg:dark?'rgba(156,191,92,0.14)':'rgba(111,125,51,0.10)', bd:'transparent' },
+      { pct:'52%', label:'36–65 · Mixed signals', fg:v['--amb'], bg:v['--asf'], bd:'transparent' },
+      { pct:'74%', label:'66–85 · Likely AI', fg:dark?'#E4834A':'#C2612A', bg:dark?'rgba(228,131,74,0.14)':'rgba(194,97,42,0.10)', bd:'transparent' },
+      { pct:'93%', label:'86–100 · AI-written', fg:v['--red'], bg:v['--rsf'], bd:dark?'rgba(224,101,90,0.35)':'rgba(192,57,47,0.25)' }
+    ];
+    return {
+      vars: v,
+      themeLabel: dark ? 'Dark theme' : 'Light theme',
+      swatches: sw.map(s => ({ name:s[0], hex:s[1] })),
+      scale: sc.map(s => ({ name:s[0], hex:s[1] })),
+      auth
+    };
+  }
+}
+</script>
+</body>
+</html>

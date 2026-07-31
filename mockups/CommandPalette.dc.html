@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>*{box-sizing:border-box}</style>
+</helmet>
+<div style="{{ vars }}">
+<div style="width:1280px;height:800px;background:var(--cv);color:var(--ink);font-family:'General Sans','Satoshi',system-ui,sans-serif;border:1px solid var(--hl);border-radius:14px;overflow:hidden;position:relative">
+
+  <div style="position:absolute;inset:0;padding:28px;display:flex;flex-direction:column;gap:20px;opacity:.45">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between">
+      <div style="display:flex;flex-direction:column;gap:10px"><div style="height:11px;width:120px;border-radius:999px;background:var(--skl)"></div><div style="height:34px;width:280px;border-radius:8px;background:var(--skl)"></div></div>
+      <div style="display:flex;gap:8px"><div style="height:30px;width:64px;border-radius:999px;background:var(--skl)"></div><div style="height:30px;width:64px;border-radius:999px;background:var(--skl)"></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+      <div style="height:170px;border-radius:14px;border:1px solid var(--hl);background:var(--sf)"></div>
+    </div>
+  </div>
+
+  <div style="position:absolute;inset:0;background:{{ scrim }}"></div>
+
+  <div style="position:absolute;top:96px;left:50%;transform:translateX(-50%) scale({{ scale }});width:640px;background:var(--el);border:1px solid var(--hl);border-radius:14px;box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column">
+    <div style="display:flex;align-items:center;gap:12px;padding:0 18px;height:56px;border-bottom:1px solid var(--hl)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.3-4.3"></path></svg>
+      <div style="flex:1;font:400 17px/1 'General Sans',system-ui;color:{{ queryFg }};display:flex;align-items:center;gap:1px">{{ query }}<div style="width:1.5px;height:19px;background:var(--ac)"></div></div>
+      <div style="font:500 11px/1 ui-monospace,Menlo,monospace;padding:4px 6px;border-radius:5px;background:var(--skl);color:var(--sec)">esc</div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;padding:8px 0 6px">
+      <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+        <div style="display:flex;flex-direction:column">
+          <div style="padding:10px 18px 6px;font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">{{ g.label }}</div>
+          <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:14px;height:44px;margin:0 8px;padding:0 10px;border-radius:10px;background:{{ i.bg }};box-shadow:{{ i.inset }}">
+              <div style="width:26px;height:26px;flex:none;border-radius:8px;background:{{ i.iconBg }};display:grid;place-items:center;font:500 11px/1 'General Sans',system-ui;color:{{ i.iconFg }}">{{ i.glyph }}</div>
+              <div style="flex:1;min-width:0;display:flex;align-items:baseline;gap:8px">
+                <div style="font:500 14px/1 'General Sans',system-ui;color:{{ i.fg }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.title }}</div>
+                <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ i.sub }}</div>
+              </div>
+              <div style="font:400 12px/1 'General Sans',system-ui;color:{{ i.hintFg }};flex:none">{{ i.hint }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="border-top:1px solid var(--hl);padding:10px 18px;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:16px;font:400 12px/1 'General Sans',system-ui;color:var(--sec)">
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-family:ui-monospace,Menlo,monospace;padding:3px 5px;border-radius:5px;background:var(--skl)">↵</span>Open</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-family:ui-monospace,Menlo,monospace;padding:3px 5px;border-radius:5px;background:var(--skl)">⌘↵</span>Run match</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="font-family:ui-monospace,Menlo,monospace;padding:3px 5px;border-radius:5px;background:var(--skl)">↑↓</span>Navigate</div>
+      </div>
+      <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">{{ resultCount }}</div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;default&quot;,&quot;typing&quot;],&quot;default&quot;:&quot;default&quot;,&quot;tsType&quot;:&quot;'default'|'typing'&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const state = this.props.state || 'default';
+    const v = dark ? {
+      '--cv':'#0E0E11','--sf':'#17171B','--el':'#1E1E24','--ink':'#F4F4F2','--sec':'#A0A0A8',
+      '--hl':'rgba(255,255,255,0.09)','--ac':'#6B82FF','--acs':'rgba(107,130,255,0.14)',
+      '--sh':'0 24px 60px -24px rgba(0,0,0,0.85)','--skl':'rgba(255,255,255,0.07)',
+      '--grn':'#3FBF87','--gsf':'rgba(63,191,135,0.14)'
+    } : {
+      '--cv':'#FAFAF7','--sf':'#FFFFFF','--el':'#FFFFFF','--ink':'#16161A','--sec':'#6B6B72',
+      '--hl':'rgba(0,0,0,0.08)','--ac':'#2743E0','--acs':'rgba(39,67,224,0.08)',
+      '--sh':'0 24px 60px -28px rgba(22,22,26,0.32)','--skl':'rgba(22,22,26,0.06)',
+      '--grn':'#1F8A5B','--gsf':'rgba(31,138,91,0.10)'
+    };
+    const typing = state === 'typing';
+    const mk = (glyph, title, sub, hint, sel, accentIcon) => ({
+      glyph, title, sub, hint,
+      bg: sel ? v['--acs'] : 'transparent',
+      inset: sel ? 'inset 2px 0 0 ' + v['--ac'] : 'none',
+      fg: v['--ink'],
+      hintFg: sel ? v['--ac'] : v['--sec'],
+      iconBg: accentIcon ? v['--acs'] : v['--skl'],
+      iconFg: accentIcon ? v['--ac'] : v['--sec']
+    });
+    const groups = typing ? [
+      { label: 'Host startups', items: [
+        mk('SR', 'Sadeem Robotics', '148 applicants · 1 open role', 'Rank pool', true, true),
+        mk('SR', 'Sadeem Robotics — shortlist', '6 candidates shortlisted', '', false, false)
+      ]},
+      { label: 'Candidates', items: [
+        mk('LA', 'Layla Al-Mansouri', 'Fit 91 for Sadeem · 4% AI', '', false, false),
+        mk('SA', 'Salma Darwish', 'Fit 64 for Sadeem · 31% AI', '', false, false)
+      ]},
+      { label: 'Actions', items: [
+        mk('⌘', 'Set authenticity threshold…', 'Currently 65%', '', false, false)
+      ]}
+    ] : [
+      { label: 'Recent', items: [
+        mk('MP', 'Match pool → Tasaheel Fintech', 'Last run 2 hours ago', 'Rerun', true, true),
+        mk('ML', 'Machine Learning Intern', 'Sadeem Robotics · 148 applicants', '', false, false)
+      ]},
+      { label: 'Actions', items: [
+        mk('+', 'New role', 'Opens the 3-step builder', '⌘N', false, false),
+        mk('↑', 'Set authenticity threshold…', 'Currently 65%', '⌘T', false, false),
+        mk('↓', 'Export shortlist as CSV', 'Current startup view', '⌘E', false, false),
+        mk('◐', 'Toggle appearance', 'Light / dark', '⌘⇧L', false, false)
+      ]}
+    ];
+    return {
+      vars: v, groups,
+      scale: typing ? '1' : '1',
+      scrim: dark ? 'rgba(0,0,0,0.55)' : 'rgba(22,22,26,0.22)',
+      query: typing ? 'sadeem' : 'Search candidates, roles, startups, actions',
+      queryFg: typing ? v['--ink'] : v['--sec'],
+      resultCount: typing ? '5 results' : '6 commands'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>*{box-sizing:border-box}</style>
+</helmet>
+<div style="{{ vars }}">
+<div style="width:1280px;height:860px;background:var(--cv);color:var(--ink);font-family:'General Sans','Satoshi',system-ui,sans-serif;border:1px solid var(--hl);border-radius:14px;overflow:hidden;display:flex;position:relative">
+
+  <div style="width:224px;flex:none;background:var(--sf);border-right:1px solid var(--hl);padding:24px 16px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 8px">
+      <div style="width:22px;height:22px;border-radius:6px;border:1.5px solid var(--ink);display:grid;place-items:center"><div style="width:8px;height:8px;border-radius:999px;background:var(--ac)"></div></div>
+      <div style="font-family:Fraunces,Georgia,serif;font-size:20px;letter-spacing:-.01em">Rubric</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 8px;border-radius:8px;color:var(--sec);font:400 14px/1 'General Sans',system-ui"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>Open roles</div>
+      <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 8px;border-radius:8px;background:var(--acs);color:var(--ac);font:500 14px/1 'General Sans',system-ui"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h12"></path></svg>Candidate pool</div>
+      <div style="display:flex;align-items:center;gap:10px;height:34px;padding:0 8px;border-radius:8px;color:var(--sec);font:400 14px/1 'General Sans',system-ui"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 12l4-2"></path></svg>Match runs</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec);padding:0 8px">Host startups</div>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ hosts }}" as="h" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:32px;padding:0 8px;border-radius:8px;background:{{ h.bg }}">
+            <div style="display:flex;align-items:center;gap:9px;min-width:0"><div style="width:6px;height:6px;border-radius:999px;background:{{ h.dot }};flex:none"></div><div style="font:{{ h.font }} 13px/1 'General Sans',system-ui;color:{{ h.fg }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ h.name }}</div></div>
+            <div style="font:400 11px/1 ui-monospace,Menlo,monospace;color:var(--sec)">{{ h.n }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="margin-top:auto;border:1px solid var(--hl);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px">
+      <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--sec)">Shared pool</div>
+      <div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1;letter-spacing:-.02em">612</div>
+      <div style="font:400 12px/1.4 'General Sans',system-ui;color:var(--sec)">applicants across 6 roles, ranked per startup</div>
+    </div>
+  </div>
+
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <div style="height:60px;flex:none;border-bottom:1px solid var(--hl);background:var(--sf);display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+      <div style="display:flex;align-items:center;gap:8px;font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Candidate pool<span style="opacity:.5">/</span><span style="color:var(--ink);font-weight:500">{{ crumb }}</span></div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="display:flex;align-items:center;gap:8px;height:32px;width:200px;padding:0 10px;border:1px solid var(--hl);border-radius:10px;color:var(--sec)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4.3-4.3"></path></svg><div style="font:400 13px/1 'General Sans',system-ui;flex:1">Search pool</div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;padding:3px 5px;border-radius:5px;background:var(--skl)">⌘K</div></div>
+        <div style="height:32px;padding:0 14px;border-radius:10px;background:var(--ac);color:#fff;font:500 13px/32px 'General Sans',system-ui">{{ primaryCta }}</div>
+      </div>
+    </div>
+
+    <div style="flex:none;padding:28px 28px 20px;display:flex;flex-direction:column;gap:20px;border-bottom:1px solid var(--hl)">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+          <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)">Match pool → startup</div>
+          <div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">{{ headline }}</div>
+          <div style="font:400 14px/1.4 'General Sans',system-ui;color:var(--sec)">{{ subline }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;flex:none">
+          <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Authenticity threshold — hide above</div>
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:280px;position:relative;height:20px;display:flex;align-items:center">
+              <div style="position:absolute;left:0;right:0;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--grn),var(--amb),var(--red));opacity:.35"></div>
+              <div style="position:absolute;left:0;width:{{ sliderFill }};height:6px;border-radius:999px;background:linear-gradient(90deg,var(--grn),var(--amb),var(--red))"></div>
+              <div style="position:absolute;left:{{ sliderKnob }};width:18px;height:18px;border-radius:999px;background:var(--sf);border:1.5px solid var(--ink);box-shadow:var(--sh)"></div>
+            </div>
+            <div style="font-family:Fraunces,Georgia,serif;font-size:20px;line-height:1;letter-spacing:-.01em;min-width:46px;text-align:right">{{ thresholdLabel }}</div>
+          </div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">{{ thresholdNote }}</div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+          <div style="height:32px;padding:0 13px;border-radius:999px;background:{{ c.bg }};border:1px solid {{ c.bd }};color:{{ c.fg }};font:500 13px/30px 'General Sans',system-ui">{{ c.label }}</div>
+        </sc-for>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:10px;font:400 13px/1 'General Sans',system-ui;color:var(--sec)">
+          <div>Sort</div>
+          <div style="display:flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:10px;border:1px solid var(--hl);color:var(--ink);font-weight:500">Fit score<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;overflow:hidden;padding:0 28px">
+      <sc-if value="{{ isPre }}" hint-placeholder-val="{{ false }}">
+        <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding-bottom:60px">
+          <div style="width:112px;height:112px;position:relative">
+            <svg width="112" height="112" viewBox="0 0 112 112" style="transform:rotate(-90deg)"><circle cx="56" cy="56" r="50" fill="none" stroke="var(--hl)" stroke-width="6" stroke-dasharray="4 8"></circle></svg>
+            <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:28px;color:var(--sec)">—</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
+            <div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.15;letter-spacing:-.02em">Pick a host startup to rank the pool</div>
+            <div style="font:400 14px/1.6 'General Sans',system-ui;color:var(--sec);max-width:52ch">One shared pool of 612 applicants. Rubric scores every one of them against the startup you choose — role requirements, screening answers, and resume evidence.</div>
+          </div>
+          <div style="display:flex;gap:10px;padding-top:6px">
+            <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--ac);color:#fff;font:500 14px/40px 'General Sans',system-ui">Rank for Sadeem Robotics</div>
+            <div style="height:40px;padding:0 18px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);font:500 14px/38px 'General Sans',system-ui">Compare two startups</div>
+          </div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-top:4px">Last run for Tasaheel Fintech · 2 hours ago</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;padding-top:8px">
+          <div style="display:grid;grid-template-columns:34px 56px 1fr 150px 128px 20px;gap:16px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--hl);font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)"><div>#</div><div>Fit</div><div>Candidate</div><div>Authenticity</div><div>Signals</div><div></div></div>
+          <sc-for list="{{ ghosts }}" as="g" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:34px 56px 1fr 150px 128px 20px;gap:16px;align-items:center;padding:15px 8px;border-bottom:1px solid var(--hl);opacity:{{ g.op }}">
+              <div style="height:10px;width:16px;border-radius:999px;background:var(--skl)"></div>
+              <div style="width:36px;height:36px;border-radius:999px;background:var(--skl)"></div>
+              <div style="display:flex;flex-direction:column;gap:7px"><div style="height:11px;width:{{ g.w1 }};border-radius:999px;background:var(--skl)"></div><div style="height:9px;width:{{ g.w2 }};border-radius:999px;background:var(--skl);opacity:.6"></div></div>
+              <div style="height:26px;width:80px;border-radius:999px;background:var(--skl)"></div>
+              <div style="height:10px;width:96px;border-radius:999px;background:var(--skl);opacity:.6"></div>
+              <div></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;padding-top:8px">
+          <div style="display:grid;grid-template-columns:34px 56px 1fr 150px 128px 20px;gap:16px;align-items:center;padding:12px 8px;border-bottom:1px solid var(--hl);font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)"><div>#</div><div>Fit</div><div>Candidate</div><div>Authenticity</div><div>Signals</div><div></div></div>
+
+          <sc-if value="{{ hasBanner }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0 4px;padding:12px 14px;border:1px solid var(--hl);border-radius:10px;background:var(--sf)">
+              <div style="display:flex;align-items:center;gap:10px"><div style="width:6px;height:6px;border-radius:999px;background:{{ bannerDot }}"></div><div style="font:400 13px/1 'General Sans',system-ui;color:var(--ink)">{{ bannerText }}</div></div>
+              <div style="font:500 13px/1 'General Sans',system-ui;color:var(--ac)">{{ bannerAction }}</div>
+            </div>
+          </sc-if>
+
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+            <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--hl);background:{{ r.rowBg }};box-shadow:{{ r.rowInset }};opacity:{{ r.opacity }}">
+              <div style="display:grid;grid-template-columns:34px 56px 1fr 150px 128px 20px;gap:16px;align-items:center;padding:15px 8px">
+                <div style="font:400 13px/1 ui-monospace,Menlo,monospace;color:var(--sec)">{{ r.rank }}</div>
+                <div style="position:relative;width:36px;height:36px">
+                  <svg width="36" height="36" viewBox="0 0 36 36" style="transform:rotate(-90deg)"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--hl)" stroke-width="3"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="{{ r.dialColor }}" stroke-width="3" stroke-linecap="round" stroke-dasharray="94" stroke-dashoffset="{{ r.dash }}"></circle></svg>
+                  <div style="position:absolute;inset:0;display:grid;place-items:center;font-family:Fraunces,Georgia,serif;font-size:12px">{{ r.fit }}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+                  <div style="font:500 14px/1.2 'General Sans',system-ui">{{ r.name }}</div>
+                  <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.meta }}</div>
+                </div>
+                <div style="display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 10px;border-radius:999px;background:{{ r.authBg }};border:1px solid {{ r.authBd }};width:fit-content"><div style="width:6px;height:6px;border-radius:999px;background:{{ r.authFg }}"></div><div style="font:500 12px/1 'General Sans',system-ui;color:{{ r.authFg }}">{{ r.auth }}</div></div>
+                <div style="font:400 12px/1.35 'General Sans',system-ui;color:var(--sec)">{{ r.signals }}</div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ r.chev }}" stroke-width="1.5" stroke-linecap="round" style="transform:{{ r.chevRot }}"><path d="m6 9 6 6 6-6"></path></svg>
+              </div>
+              <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:2px 8px 20px 106px;display:flex;flex-direction:column;gap:12px">
+                  <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Why she fits Sadeem Robotics</div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                    <div style="border:1px solid var(--hl);border-radius:10px;background:var(--sf);padding:13px;display:flex;flex-direction:column;gap:6px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;line-height:1;color:var(--ac)">+34</div><div style="font:500 13px/1.35 'General Sans',system-ui">Perception work matches the inspection stack</div><div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Corrosion detection on 3,400 field photos.</div></div>
+                    <div style="border:1px solid var(--hl);border-radius:10px;background:var(--sf);padding:13px;display:flex;flex-direction:column;gap:6px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;line-height:1;color:var(--ac)">+27</div><div style="font:500 13px/1.35 'General Sans',system-ui">PyTorch depth beyond coursework</div><div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Custom loop, named the failure slice she fixed.</div></div>
+                    <div style="border:1px solid var(--hl);border-radius:10px;background:var(--sf);padding:13px;display:flex;flex-direction:column;gap:6px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;line-height:1;color:var(--ac)">+19</div><div style="font:500 13px/1.35 'General Sans',system-ui">On-site in Doha for all 10 weeks</div><div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Clears the hard eligibility gate.</div></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="height:32px;padding:0 14px;border-radius:10px;background:var(--ac);color:#fff;font:500 13px/32px 'General Sans',system-ui">Open full profile</div>
+                    <div style="height:32px;padding:0 14px;border-radius:10px;border:1px solid var(--hl);font:500 13px/30px 'General Sans',system-ui">Shortlist</div>
+                    <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">4 signals · 1 caution reviewed</div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ isDrawer }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;inset:0;background:{{ scrim }};display:flex;justify-content:flex-end">
+      <dc-import name="CandidateDrawer" theme="{{ theme }}" attached="{{ true }}" hint-size="560px,860px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;state&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;pre&quot;,&quot;loading&quot;,&quot;staggering&quot;,&quot;results&quot;,&quot;expanded&quot;,&quot;drawer&quot;,&quot;strict&quot;,&quot;open&quot;],&quot;default&quot;:&quot;results&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const state = this.props.state || 'results';
+    const v = dark ? {
+      '--cv':'#0E0E11','--sf':'#17171B','--el':'#1E1E24','--ink':'#F4F4F2','--sec':'#A0A0A8',
+      '--hl':'rgba(255,255,255,0.09)','--ac':'#6B82FF','--acs':'rgba(107,130,255,0.14)',
+      '--sh':'0 8px 28px -14px rgba(0,0,0,0.75)','--skl':'rgba(255,255,255,0.07)',
+      '--grn':'#3FBF87','--amb':'#E0A63C','--red':'#E0655A',
+      '--gsf':'rgba(63,191,135,0.14)','--asf':'rgba(224,166,60,0.16)','--rsf':'rgba(224,101,90,0.14)'
+    } : {
+      '--cv':'#FAFAF7','--sf':'#FFFFFF','--el':'#FFFFFF','--ink':'#16161A','--sec':'#6B6B72',
+      '--hl':'rgba(0,0,0,0.08)','--ac':'#2743E0','--acs':'rgba(39,67,224,0.08)',
+      '--sh':'0 6px 24px -12px rgba(22,22,26,0.16)','--skl':'rgba(22,22,26,0.06)',
+      '--grn':'#1F8A5B','--amb':'#B87514','--red':'#C0392F',
+      '--gsf':'rgba(31,138,91,0.10)','--asf':'rgba(184,117,20,0.12)','--rsf':'rgba(192,57,47,0.10)'
+    };
+    const pool = [
+      ['Layla Al-Mansouri','Qatar University · CS 2027 · PyTorch, ROS 2',91,4,'Field CV project · on-site'],
+      ['Yusuf Chowdhury','TAMU-Q · ECE 2027 · C++, embedded vision',87,11,'Robotics club lead · on-site'],
+      ['Priya Raghunathan','Carnegie Mellon Qatar · CS 2028 · Python',84,38,'Two ML courses · remote first 3 wks'],
+      ['Omar Haddad','Qatar University · CS 2027 · TensorFlow',81,46,'Kaggle top 12% · on-site'],
+      ['Noor Al-Kuwari','HBKU · Data Science 2027 · Python, SQL',76,19,'Internship at Wajen · on-site'],
+      ['Mateo Rivas','Weill Cornell Q · Biomed 2027 · Python',71,72,'Strong resume, generic answers'],
+      ['Fatima Zahra Bennani','TAMU-Q · CS 2028 · Python, OpenCV',68,88,'Answers read as AI-written'],
+      ['Daniel Okonkwo','HBKU · CS 2027 · Java, some Python',61,93,'Cover letter fully AI-written']
+    ];
+    const thr = state === 'strict' ? 20 : (state === 'open' ? 100 : 65);
+    const flagFloor = 50;
+    const scaleFor = (ai) => {
+      if (ai <= 15) return [v['--grn'], v['--gsf'], 'transparent'];
+      if (ai <= 35) return [dark ? '#9CBF5C' : '#6F7D33', dark ? 'rgba(156,191,92,0.14)' : 'rgba(111,125,51,0.10)', 'transparent'];
+      if (ai <= 65) return [v['--amb'], v['--asf'], 'transparent'];
+      if (ai <= 85) return [dark ? '#E4834A' : '#C2612A', dark ? 'rgba(228,131,74,0.14)' : 'rgba(194,97,42,0.10)', 'transparent'];
+      return [v['--red'], v['--rsf'], dark ? 'rgba(224,101,90,0.35)' : 'rgba(192,57,47,0.25)'];
+    };
+    const visible = pool.filter(p => p[3] <= thr);
+    const hiddenCount = pool.length - visible.length;
+    const expandedIdx = (state === 'expanded') ? 0 : -1;
+    const staggering = state === 'staggering';
+    const rows = visible.map((p, i) => {
+      const [fg, bg, bd] = scaleFor(p[3]);
+      const flagged = p[3] >= flagFloor;
+      return {
+        rank: String(i + 1).padStart(2, '0'),
+        fit: p[2], dash: Math.round(94 * (1 - p[2] / 100)),
+        dialColor: v['--ac'],
+        name: p[0], meta: p[1],
+        auth: p[3] + '%', authFg: fg, authBg: bg, authBd: bd,
+        signals: flagged ? 'Flagged · review answers' : p[4],
+        rowBg: i === expandedIdx ? v['--acs'] : (flagged ? v['--rsf'] : 'transparent'),
+        rowInset: i === expandedIdx ? 'inset 2px 0 0 ' + v['--ac'] : 'none',
+        chev: i === expandedIdx ? v['--ac'] : v['--sec'],
+        chevRot: i === expandedIdx ? 'rotate(180deg)' : 'none',
+        opacity: staggering ? Math.max(0, 1 - i * 0.16) : 1,
+        open: i === expandedIdx
+      };
+    });
+    const hostDefs = [
+      ['Sadeem Robotics', 148], ['Tasaheel Fintech', 132], ['Wajen Analytics', 119],
+      ['Nubian Grid', 73], ['Rafiq Logistics', 86], ['Karam Health', 54]
+    ];
+    const picked = state === 'pre' ? -1 : 0;
+    const hosts = hostDefs.map((h, i) => ({
+      name: h[0], n: h[1],
+      bg: i === picked ? v['--acs'] : 'transparent',
+      fg: i === picked ? v['--ac'] : v['--sec'],
+      font: i === picked ? 500 : 400,
+      dot: i === picked ? v['--ac'] : v['--hl']
+    }));
+    const chipDefs = [
+      ['Fit ≥ 60', true], ['Resume parsed', true], ['Cover letter supplied', false],
+      ['On-site eligible', false], ['New today', false]
+    ];
+    const chips = chipDefs.map(c => ({
+      label: c[0],
+      bg: c[1] ? v['--acs'] : 'transparent',
+      fg: c[1] ? v['--ac'] : v['--sec'],
+      bd: c[1] ? 'transparent' : v['--hl']
+    }));
+    const flaggedShown = visible.filter(p => p[3] >= flagFloor).length;
+    return {
+      vars: v, theme: dark ? 'dark' : 'light', hosts, chips, rows,
+      isPre: state === 'pre',
+      isLoading: state === 'loading',
+      isList: state !== 'pre' && state !== 'loading',
+      isDrawer: state === 'drawer',
+      scrim: dark ? 'rgba(0,0,0,0.5)' : 'rgba(22,22,26,0.28)',
+      crumb: state === 'pre' ? 'Shared pool · 612' : 'Sadeem Robotics · ML Intern',
+      primaryCta: state === 'pre' ? 'Run match' : 'Export shortlist',
+      headline: state === 'pre' ? 'One pool, ranked per startup' : 'Sadeem Robotics',
+      subline: state === 'pre'
+        ? 'Choose a host startup on the left, or run the match from any open role.'
+        : (state === 'loading'
+          ? 'Scoring 612 applicants against 3 required qualifications…'
+          : visible.length + ' of 612 applicants shown · ranked for Machine Learning Intern · run 12:47'),
+      sliderFill: thr + '%', sliderKnob: 'calc(' + thr + '% - 9px)',
+      thresholdLabel: thr + '%',
+      thresholdNote: state === 'strict'
+        ? 'Strict — anything above 20% AI is hidden'
+        : (state === 'open' ? 'Permissive — nothing hidden, 50%+ flagged in red' : 'Default — hides 65% and above, flags 50%+'),
+      hasBanner: hiddenCount > 0 || flaggedShown > 0,
+      bannerText: hiddenCount > 0
+        ? hiddenCount + ' applicants hidden above the ' + thr + '% authenticity threshold · ' + flaggedShown + ' flagged'
+        : flaggedShown + ' applicants flagged: answers score ' + flagFloor + '% or more AI-written · 0 hidden',
+      bannerAction: hiddenCount > 0 ? 'Show hidden' : 'Review flagged',
+      bannerDot: hiddenCount > 0 ? v['--red'] : v['--amb'],
+      ghosts: [
+        {op:1,w1:'54%',w2:'34%'},{op:.94,w1:'46%',w2:'30%'},{op:.86,w1:'58%',w2:'26%'},
+        {op:.76,w1:'42%',w2:'32%'},{op:.64,w1:'50%',w2:'28%'},{op:.5,w1:'38%',w2:'24%'},{op:.36,w1:'48%',w2:'30%'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

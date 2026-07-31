@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>*{box-sizing:border-box}</style>
+</helmet>
+<div style="{{ vars }}">
+<div style="width:1280px;height:860px;background:var(--cv);color:var(--ink);font-family:'General Sans','Satoshi',system-ui,sans-serif;border:1px solid var(--hl);border-radius:14px;overflow:hidden;display:flex;flex-direction:column">
+
+  <div style="height:60px;flex:none;border-bottom:1px solid var(--hl);background:var(--sf);display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="width:22px;height:22px;border-radius:6px;border:1.5px solid var(--ink);display:grid;place-items:center"><div style="width:8px;height:8px;border-radius:999px;background:var(--ac)"></div></div>
+      <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">New role<span style="opacity:.5;padding:0 8px">/</span><span style="color:var(--ink);font-weight:500">Machine Learning Intern</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">Draft saved 12:41</div>
+      <div style="height:32px;padding:0 14px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);font:500 13px/30px 'General Sans',system-ui">Save & exit</div>
+    </div>
+  </div>
+
+  <div style="height:72px;flex:none;border-bottom:1px solid var(--hl);display:flex;align-items:center;gap:0;padding:0 28px">
+    <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+      <div style="display:flex;align-items:center;gap:12px;padding-right:28px">
+        <div style="width:26px;height:26px;border-radius:999px;background:{{ s.dotBg }};border:1px solid {{ s.dotBd }};color:{{ s.dotFg }};font:500 12px/24px 'General Sans',system-ui;text-align:center">{{ s.n }}</div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="font:500 14px/1 'General Sans',system-ui;color:{{ s.fg }}">{{ s.title }}</div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">{{ s.sub }}</div>
+        </div>
+        <div style="width:40px;height:1px;background:var(--hl);margin-left:16px"></div>
+      </div>
+    </sc-for>
+    <div style="margin-left:auto;font:500 12px/1 'General Sans',system-ui;letter-spacing:.08em;text-transform:uppercase;color:var(--sec)">{{ stepLabel }}</div>
+  </div>
+
+  <div style="flex:1;overflow:hidden;display:flex;justify-content:center;padding:36px 28px">
+   <div style="width:100%;max-width:880px;display:flex;flex-direction:column;gap:28px">
+
+    <sc-if value="{{ isA }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.1;letter-spacing:-.02em">Public role details</div>
+          <div style="font:400 14px/1.5 'General Sans',system-ui;color:var(--sec);max-width:62ch">Everything on this step appears on the public application page. Interns see it exactly as written.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 260px;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Role title</div>
+            <div style="height:40px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px;font:400 14px/38px 'General Sans',system-ui">Machine Learning Intern</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Host startup</div>
+            <div style="height:40px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px;display:flex;align-items:center;justify-content:space-between"><div style="font:400 14px/1 'General Sans',system-ui">Sadeem Robotics</div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font:500 13px/1 'General Sans',system-ui">Description</div>
+            <div style="display:flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1px solid var(--ac);color:var(--ac);font:500 12px/26px 'General Sans',system-ui"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M7 7 4.5 4.5M17 7l2.5-2.5M7 17l-2.5 2.5M17 17l2.5 2.5"></path></svg>Improve with AI</div>
+          </div>
+          <div style="min-height:150px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:14px 16px;font:400 14px/1.6 'General Sans',system-ui;color:var(--ink)">You will join a four-person perception team building autonomous inspection drones for gas infrastructure. Expect to own one model end to end: data collection in the field, training runs on our cluster, and evaluation against real inspection footage.<div style="color:var(--sec);padding-top:10px">Rewrites keep your voice — the AI action only tightens structure, never invents benefits or requirements.</div></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-top:2px"><div>Markdown supported</div><div>612 / 4000</div></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font:500 13px/1 'General Sans',system-ui">Required qualifications</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <sc-for list="{{ quals }}" as="q" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;height:40px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg>
+                <div style="flex:1;font:400 14px/1 'General Sans',system-ui">{{ q.text }}</div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+              </div>
+            </sc-for>
+            <div style="display:flex;align-items:center;gap:8px;height:40px;border-radius:10px;border:1px dashed var(--hl);padding:0 12px;color:var(--sec);font:500 13px/1 'General Sans',system-ui"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Add qualification</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Employment type</div>
+            <div style="display:flex;padding:3px;border-radius:10px;background:var(--skl);gap:3px">
+              <div style="flex:1;height:32px;border-radius:8px;background:var(--sf);border:1px solid var(--hl);font:500 13px/30px 'General Sans',system-ui;text-align:center">Full-time internship</div>
+              <div style="flex:1;height:32px;border-radius:8px;font:500 13px/32px 'General Sans',system-ui;text-align:center;color:var(--sec)">Part-time</div>
+              <div style="flex:1;height:32px;border-radius:8px;font:500 13px/32px 'General Sans',system-ui;text-align:center;color:var(--sec)">Co-op</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font:500 13px/1 'General Sans',system-ui">Duration & location</div>
+            <div style="display:flex;gap:10px">
+              <div style="flex:1;height:38px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px;font:400 14px/36px 'General Sans',system-ui">10 weeks</div>
+              <div style="flex:1;height:38px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);padding:0 12px;font:400 14px/36px 'General Sans',system-ui">On-site · Doha</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.1;letter-spacing:-.02em">Application form</div>
+          <div style="font:400 14px/1.5 'General Sans',system-ui;color:var(--sec);max-width:62ch">Choose what every applicant must give you. Fewer fields raise completion; screening questions raise match precision.</div>
+        </div>
+
+        <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);overflow:hidden">
+          <div style="padding:14px 18px;border-bottom:1px solid var(--hl);font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Applicant fields</div>
+          <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid var(--hl)">
+              <div style="width:40px;height:24px;flex:none;border-radius:999px;background:{{ f.trackBg }};border:1px solid {{ f.trackBd }};position:relative"><div style="position:absolute;top:{{ f.knobTop }};left:{{ f.knobLeft }};width:18px;height:18px;border-radius:999px;background:{{ f.knobBg }}"></div></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:3px">
+                <div style="font:500 14px/1 'General Sans',system-ui;color:{{ f.fg }}">{{ f.label }}</div>
+                <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">{{ f.hint }}</div>
+              </div>
+              <div style="height:24px;padding:0 9px;border-radius:999px;background:{{ f.tagBg }};color:{{ f.tagFg }};font:500 12px/24px 'General Sans',system-ui">{{ f.tag }}</div>
+            </div>
+          </sc-for>
+          <div style="display:flex;gap:16px;padding:16px 18px">
+            <div style="flex:1;border:1px solid var(--ac);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;background:var(--acs)">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div style="font:500 14px/1 'General Sans',system-ui">Resume</div><div style="height:22px;padding:0 8px;border-radius:999px;background:var(--ac);color:#fff;font:500 11px/22px 'General Sans',system-ui">Required</div></div>
+              <div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">PDF or DOCX · max 5 MB. Parsed for the match pool.</div>
+            </div>
+            <div style="flex:1;border:1px solid var(--hl);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div style="font:500 14px/1 'General Sans',system-ui">Cover letter</div><div style="height:22px;padding:0 8px;border-radius:999px;background:var(--skl);color:var(--sec);font:500 11px/22px 'General Sans',system-ui">Optional</div></div>
+              <div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Scored for authenticity when supplied.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start">
+          <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--hl)">
+              <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Screening questions</div>
+              <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">Mandatory for applicants once added</div>
+            </div>
+            <sc-for list="{{ questions }}" as="q" hint-placeholder-count="3">
+              <div style="display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--hl);align-items:flex-start">
+                <div style="width:22px;height:22px;flex:none;border-radius:999px;background:var(--skl);font:500 11px/22px 'General Sans',system-ui;text-align:center;color:var(--sec)">{{ q.n }}</div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:5px">
+                  <div style="font:400 14px/1.45 'General Sans',system-ui">{{ q.text }}</div>
+                  <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">{{ q.meta }}</div>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--sec)" stroke-width="1.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+              </div>
+            </sc-for>
+            <div style="padding:14px 18px"><div style="display:flex;align-items:center;gap:8px;height:38px;border-radius:10px;border:1px dashed var(--hl);padding:0 12px;color:var(--sec);font:500 13px/1 'General Sans',system-ui"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>Write a question</div></div>
+          </div>
+
+          <div style="border:1px solid var(--ac);border-radius:14px;background:var(--sf);overflow:hidden;box-shadow:var(--sh)">
+            <div style="padding:14px 16px;border-bottom:1px solid var(--hl);display:flex;align-items:center;gap:8px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ac)" stroke-width="1.5" stroke-linecap="round"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M7 7 4.5 4.5M17 7l2.5-2.5M7 17l-2.5 2.5M17 17l2.5 2.5"></path></svg>
+              <div style="font:500 13px/1 'General Sans',system-ui">AI-suggested questions</div>
+            </div>
+            <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+              <div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Derived from your description and required qualifications.</div>
+              <sc-for list="{{ suggested }}" as="s" hint-placeholder-count="3">
+                <div style="border:1px solid var(--hl);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:8px;background:{{ s.bg }}">
+                  <div style="font:400 13px/1.5 'General Sans',system-ui">{{ s.text }}</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div style="font:400 11px/1 'General Sans',system-ui;color:var(--sec)">{{ s.signal }}</div>
+                    <div style="display:flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;background:{{ s.btnBg }};color:{{ s.btnFg }};font:500 12px/24px 'General Sans',system-ui">{{ s.btn }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isC }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:Fraunces,Georgia,serif;font-size:28px;line-height:1.1;letter-spacing:-.02em">Review & publish</div>
+          <div style="font:400 14px/1.5 'General Sans',system-ui;color:var(--sec);max-width:62ch">Published roles enter the shared QSTP pool immediately. Applicants can apply from the public link below.</div>
+        </div>
+
+        <div style="border:1px solid var(--grn);border-radius:14px;background:var(--gsf);padding:20px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:22px;height:22px;border-radius:999px;background:var(--grn);display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--sf)" stroke-width="3" stroke-linecap="round"><path d="M20 6 9 17l-5-5"></path></svg></div>
+            <div style="font:500 15px/1 'General Sans',system-ui">Published · public application link is live</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="flex:1;height:40px;border-radius:10px;background:var(--sf);border:1px solid var(--hl);padding:0 14px;font:400 14px/38px ui-monospace,Menlo,monospace;color:var(--ink);overflow:hidden;white-space:nowrap">apply.rubric.qstp/summer26/sadeem-robotics/ml-intern</div>
+            <div style="height:40px;padding:0 16px;border-radius:10px;background:var(--ac);color:#fff;font:500 13px/40px 'General Sans',system-ui">Copy link</div>
+            <div style="height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--hl);background:var(--sf);font:500 13px/38px 'General Sans',system-ui">Preview</div>
+          </div>
+          <div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec)">Also emailed to the Sadeem Robotics hiring contact and added to the QSTP cohort board.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid var(--hl);display:flex;align-items:center;justify-content:space-between"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Public details</div><div style="font:500 12px/1 'General Sans',system-ui;color:var(--ac)">Edit</div></div>
+            <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
+              <div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-bottom:5px">Title</div><div style="font:500 15px/1.3 'General Sans',system-ui">Machine Learning Intern · Sadeem Robotics</div></div>
+              <div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-bottom:5px">Type</div><div style="font:400 14px/1.4 'General Sans',system-ui">Full-time internship · 10 weeks · On-site, Doha</div></div>
+              <div><div style="font:400 12px/1 'General Sans',system-ui;color:var(--sec);padding-bottom:5px">Required qualifications</div><div style="font:400 14px/1.6 'General Sans',system-ui">Python · PyTorch or TensorFlow · Linear algebra coursework</div></div>
+            </div>
+          </div>
+          <div style="border:1px solid var(--hl);border-radius:14px;background:var(--sf);overflow:hidden">
+            <div style="padding:14px 18px;border-bottom:1px solid var(--hl);display:flex;align-items:center;justify-content:space-between"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:var(--sec)">Form</div><div style="font:500 12px/1 'General Sans',system-ui;color:var(--ac)">Edit</div></div>
+            <div style="padding:18px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;justify-content:space-between;font:400 14px/1 'General Sans',system-ui"><div>Applicant fields</div><div style="color:var(--sec)">6 enabled · 4 required</div></div>
+              <div style="display:flex;justify-content:space-between;font:400 14px/1 'General Sans',system-ui"><div>Resume</div><div style="color:var(--grn);font-weight:500">Required</div></div>
+              <div style="display:flex;justify-content:space-between;font:400 14px/1 'General Sans',system-ui"><div>Cover letter</div><div style="color:var(--sec)">Optional · scored</div></div>
+              <div style="display:flex;justify-content:space-between;font:400 14px/1 'General Sans',system-ui"><div>Screening questions</div><div style="color:var(--sec)">3 · all mandatory</div></div>
+              <div style="height:1px;background:var(--hl)"></div>
+              <div style="font:400 12px/1.5 'General Sans',system-ui;color:var(--sec)">Estimated completion time 6–8 minutes.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+   </div>
+  </div>
+
+  <div style="height:72px;flex:none;border-top:1px solid var(--hl);background:var(--sf);display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+    <div style="height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--hl);font:500 14px/38px 'General Sans',system-ui;color:var(--sec)">{{ backLabel }}</div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="font:400 13px/1 'General Sans',system-ui;color:var(--sec)">{{ footNote }}</div>
+      <div style="height:40px;padding:0 18px;border-radius:10px;background:var(--ac);color:#fff;font:500 14px/40px 'General Sans',system-ui">{{ nextLabel }}</div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:860},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;step&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;],&quot;default&quot;:&quot;a&quot;,&quot;tsType&quot;:&quot;'a'|'b'|'c'&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const dark = this.props.theme === 'dark';
+    const step = this.props.step || 'a';
+    const v = dark ? {
+      '--cv':'#0E0E11','--sf':'#17171B','--el':'#1E1E24','--ink':'#F4F4F2','--sec':'#A0A0A8',
+      '--hl':'rgba(255,255,255,0.09)','--ac':'#6B82FF','--acs':'rgba(107,130,255,0.14)',
+      '--sh':'0 8px 28px -14px rgba(0,0,0,0.75)','--skl':'rgba(255,255,255,0.07)',
+      '--grn':'#3FBF87','--gsf':'rgba(63,191,135,0.12)'
+    } : {
+      '--cv':'#FAFAF7','--sf':'#FFFFFF','--el':'#FFFFFF','--ink':'#16161A','--sec':'#6B6B72',
+      '--hl':'rgba(0,0,0,0.08)','--ac':'#2743E0','--acs':'rgba(39,67,224,0.08)',
+      '--sh':'0 6px 24px -12px rgba(22,22,26,0.16)','--skl':'rgba(22,22,26,0.06)',
+      '--grn':'#1F8A5B','--gsf':'rgba(31,138,91,0.08)'
+    };
+    const order = ['a','b','c'];
+    const idx = order.indexOf(step);
+    const stepDefs = [
+      ['1','Role details','Public copy'],
+      ['2','Application form','Fields & questions'],
+      ['3','Review','Publish & share link']
+    ];
+    const steps = stepDefs.map((s, i) => {
+      const done = i < idx, cur = i === idx;
+      return {
+        n: done ? '✓' : s[0], title:s[1], sub:s[2],
+        dotBg: cur ? v['--ac'] : (done ? v['--gsf'] : 'transparent'),
+        dotBd: cur ? v['--ac'] : v['--hl'],
+        dotFg: cur ? '#fff' : (done ? v['--grn'] : v['--sec']),
+        fg: cur ? v['--ink'] : v['--sec']
+      };
+    });
+    const fieldDefs = [
+      ['Full name','Shown on every ranked row', true, 'Required'],
+      ['Email address','Used for interview scheduling', true, 'Required'],
+      ['University & programme','Feeds the fit model', true, 'Required'],
+      ['Expected graduation','Filters eligibility', true, 'Required'],
+      ['Portfolio or GitHub','Optional link field', true, 'Optional'],
+      ['Phone number','Off by default — lowers completion', false, 'Hidden']
+    ];
+    const fields = fieldDefs.map(f => ({
+      label:f[0], hint:f[1],
+      trackBg: f[2] ? v['--ac'] : v['--skl'],
+      trackBd: f[2] ? v['--ac'] : v['--hl'],
+      knobBg: f[2] ? '#fff' : v['--sec'],
+      knobLeft: f[2] ? '19px' : '2px',
+      knobTop: f[2] ? '2px' : '2px',
+      fg: f[2] ? v['--ink'] : v['--sec'],
+      tag: f[3],
+      tagBg: f[3] === 'Required' ? v['--acs'] : v['--skl'],
+      tagFg: f[3] === 'Required' ? v['--ac'] : v['--sec']
+    }));
+    const questions = [
+      { n:'1', text:'Describe a model you trained end to end. What did you change after the first evaluation?', meta:'Long answer · 200 word cap' },
+      { n:'2', text:'Which parts of a perception pipeline have you worked on: data, training, or deployment?', meta:'Multi-select · 3 options' },
+      { n:'3', text:'Are you available on-site in Doha for the full 10 weeks?', meta:'Yes / No · eligibility gate' }
+    ];
+    const suggested = [
+      { text:'Tell us about a time your evaluation metric disagreed with real-world performance.', signal:'Signals judgement', btn:'Add', bg:'transparent', btnBg:v['--acs'], btnFg:v['--ac'] },
+      { text:'What is the largest dataset you have worked with, and how did you handle its size?', signal:'Signals scale', btn:'Add', bg:'transparent', btnBg:v['--acs'], btnFg:v['--ac'] },
+      { text:'Which paper from the last year changed how you think about perception?', signal:'Signals curiosity', btn:'Added', bg:v['--acs'], btnBg:v['--ac'], btnFg:'#fff' }
+    ];
+    return {
+      vars: v, steps,
+      isA: step === 'a', isB: step === 'b', isC: step === 'c',
+      stepLabel: 'Step ' + (idx + 1) + ' of 3',
+      quals: [
+        { text:'Python — comfortable reading unfamiliar code' },
+        { text:'PyTorch or TensorFlow, one training project minimum' },
+        { text:'Linear algebra coursework completed' }
+      ],
+      fields, questions, suggested,
+      backLabel: step === 'a' ? 'Cancel' : 'Back',
+      nextLabel: step === 'a' ? 'Continue to form' : (step === 'b' ? 'Continue to review' : 'Open match pool'),
+      footNote: step === 'b' ? 'Adding a question makes it mandatory for every applicant' : (step === 'c' ? 'Live since 12:44' : 'Nothing is public until step 3')
+    };
+  }
+}
+</script>
+</body>
+</html>

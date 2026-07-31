@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&f[]=satoshi@400,500,700&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EEEDE8}
+a{color:#2743E0;text-decoration:none}
+a:hover{color:#1C33BE;text-decoration:underline}
+</style>
+</helmet>
+<div style="background:#EEEDE8;padding:64px;display:flex;flex-direction:column;gap:96px;font-family:'General Sans','Satoshi',system-ui,sans-serif;color:#16161A;width:max-content">
+
+  <section data-screen-label="00 Cover" style="display:flex;flex-direction:column;gap:24px;max-width:1120px">
+    <div style="font:500 12px/1 'General Sans',system-ui;letter-spacing:.16em;text-transform:uppercase;color:#6B6B72">Rubric · QSTP Summer 2026 · Mockup reference v1</div>
+    <div style="font-family:Fraunces,Georgia,serif;font-size:56px;line-height:1;letter-spacing:-.03em">The living rubric</div>
+    <div style="font:400 16px/1.65 'General Sans',system-ui;color:#4A4A52;max-width:72ch">One shared pool of intern applicants, ranked for each host startup. This document is the build reference: every screen in light and dark, every key state as its own frame, and a motion note beside each frame describing exactly how it should move.</div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,240px));gap:16px;padding-top:8px">
+      <div style="border:1px solid rgba(0,0,0,0.08);border-radius:10px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:#6B6B72">Motion budget</div><div style="font:400 13px/1.5 'General Sans',system-ui">180–240ms transforms, 120ms opacity. Nothing longer than 320ms.</div></div>
+      <div style="border:1px solid rgba(0,0,0,0.08);border-radius:10px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:#6B6B72">Default spring</div><div style="font:400 13px/1.5 'General Sans',system-ui">stiffness 420 · damping 34 · mass 1. One spring for the whole product.</div></div>
+      <div style="border:1px solid rgba(0,0,0,0.08);border-radius:10px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:#6B6B72">Stagger</div><div style="font:400 13px/1.5 'General Sans',system-ui">List children 28ms apart, capped at 10 — later rows arrive already settled.</div></div>
+      <div style="border:1px solid rgba(0,0,0,0.08);border-radius:10px;background:#fff;padding:16px;display:flex;flex-direction:column;gap:6px"><div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.1em;text-transform:uppercase;color:#6B6B72">Never</div><div style="font:400 13px/1.5 'General Sans',system-ui">No spinners, no bounce overshoot on text, no fade-only page changes.</div></div>
+    </div>
+    <div style="font:400 13px/1.7 'General Sans',system-ui;color:#6B6B72;max-width:72ch;border-top:1px solid rgba(0,0,0,0.08);padding-top:16px">Frames are referenced by id — <a href="#3e">3e</a> is the expanded row, <a href="#4a">4a</a> the strict authenticity threshold. Each frame is a real, inspectable layout at 1:1 scale; nothing here is a screenshot.</div>
+  </section>
+
+  <section data-screen-label="00 Foundations" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">00</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Foundations</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Tokens, type scale, controls, the score dial, the authenticity scale, rows, empty and skeleton states. Everything downstream is assembled only from these parts.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+      <div id="0a" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">0a</div><div style="font:500 14px/1 'General Sans',system-ui">Style tile — light</div></div>
+        <dc-import name="StyleTile" theme="light" style="width:1280px;height:1640px" hint-size="1280px,1640px"></dc-import>
+      </div>
+      <div id="0b" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">0b</div><div style="font:500 14px/1 'General Sans',system-ui">Style tile — dark</div></div>
+        <dc-import name="StyleTile" theme="dark" style="width:1280px;height:1640px" hint-size="1280px,1640px"></dc-import>
+      </div>
+      <div style="width:300px;display:flex;flex-direction:column;gap:16px;padding-top:38px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:#6B6B72">Motion — foundations</div>
+        <sc-for list="{{ notes0 }}" as="n" hint-placeholder-count="4">
+          <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:4px">
+            <div style="font:500 13px/1.3 'General Sans',system-ui">{{ n.t }}</div>
+            <div style="font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52">{{ n.b }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="01 Dashboard" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">01</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Recruiter dashboard</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Open roles as quiet cards. Three numbers per card — applicants, cover letters, new today — set in Fraunces so the page scans as figures first, chrome second.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="1a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1a</div><div style="font:500 14px/1 'General Sans',system-ui">Default — light</div></div>
+        <dc-import name="Dashboard" theme="light" state="default" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Enter:</b> cards fade in from opacity 0 / translateY 8px, 28ms stagger in reading order. The three stat numbers count up from 0 over 420ms with an ease-out — commas settle only at the end, never mid-count.</div>
+      </div>
+      <div id="1b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1b</div><div style="font:500 14px/1 'General Sans',system-ui">Loading skeleton — light</div></div>
+        <dc-import name="Dashboard" theme="light" state="skeleton" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Loading:</b> band opacity breathes 0.6→1 over 1.1s, cards offset 90ms apart so the grid reads as a wave, not a strobe. Bands occupy the exact geometry of the real card, so the swap to <a href="#1a">1a</a> is a crossfade with zero layout shift.</div>
+      </div>
+      <div id="1c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1c</div><div style="font:500 14px/1 'General Sans',system-ui">Hover / focus — light</div></div>
+        <dc-import name="Dashboard" theme="light" state="hover" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Hover:</b> border to accent, translateY −2px, ambient shadow in over 160ms. The “Match pool” pill fades and slides 4px from the right, 40ms behind the lift. Keyboard focus shows the same state plus a 2px accent ring, no lift.</div>
+      </div>
+      <div id="1d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1d</div><div style="font:500 14px/1 'General Sans',system-ui">Default — dark</div></div>
+        <dc-import name="Dashboard" theme="dark" state="default" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+      </div>
+      <div id="1e" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1e</div><div style="font:500 14px/1 'General Sans',system-ui">Hover — dark</div></div>
+        <dc-import name="Dashboard" theme="dark" state="hover" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Dark hover:</b> shadow carries almost no weight here — the accent border does the work, and elevated surface lifts one step (#17171B → #1E1E24) instead.</div>
+      </div>
+      <div id="1f" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">1f</div><div style="font:500 14px/1 'General Sans',system-ui">Loading skeleton — dark</div></div>
+        <dc-import name="Dashboard" theme="dark" state="skeleton" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="02 Intake builder" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">02</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Job &amp; intake builder</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Three steps: public role details, the application form, then review and publish. The step rail is the only persistent chrome; the column below it is a single 880px measure so the eye never re-anchors between steps.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="2a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2a</div><div style="font:500 14px/1 'General Sans',system-ui">Step 1 · Role details — light</div></div>
+        <dc-import name="IntakeBuilder" theme="light" step="a" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Improve with AI:</b> the pill fills accent and its label crossfades to “Rewriting…”; the textarea keeps its height while replaced text arrives as a 200ms word-by-word reveal (no cursor jump, no skeleton). An inline “Undo rewrite” chip appears for 8s, then fades.</div>
+      </div>
+      <div id="2b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2b</div><div style="font:500 14px/1 'General Sans',system-ui">Step 2 · Form builder — light</div></div>
+        <dc-import name="IntakeBuilder" theme="light" step="b" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Toggle:</b> knob travels on the default spring, track colour 120ms; the row's label and tag crossfade between ink and secondary. <b style="font-weight:500;color:#16161A">Add suggested question:</b> the card lifts out of the right panel and lands in the list as a shared-element move — the list reflows with FLIP, the panel closes its gap in the same frame.</div>
+      </div>
+      <div id="2c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2c</div><div style="font:500 14px/1 'General Sans',system-ui">Step 3 · Review &amp; published link — light</div></div>
+        <dc-import name="IntakeBuilder" theme="light" step="c" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Publish:</b> button label swaps to a 22px check that draws in 240ms; the green confirmation panel expands from 0 height with its content held at opacity 0 until 60% of the way open. Copy link flips the button to “Copied” for 1.4s — no toast.</div>
+      </div>
+      <div id="2d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2d</div><div style="font:500 14px/1 'General Sans',system-ui">Step 1 — dark</div></div>
+        <dc-import name="IntakeBuilder" theme="dark" step="a" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="2e" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2e</div><div style="font:500 14px/1 'General Sans',system-ui">Step 2 — dark</div></div>
+        <dc-import name="IntakeBuilder" theme="dark" step="b" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="2f" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">2f</div><div style="font:500 14px/1 'General Sans',system-ui">Step 3 — dark</div></div>
+        <dc-import name="IntakeBuilder" theme="dark" step="c" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Step transitions:</b> horizontal, 24px, opposite directions for forward and back; the step rail dot morphs number → check with the numeral scaling to 0.8 as the check draws.</div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="03 Match pool" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="height:24px;padding:0 10px;border-radius:999px;background:#2743E0;color:#fff;font:500 12px/24px 'General Sans',system-ui">Hero</div>
+        <div style="font:500 12px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:#6B6B72">Centrepiece</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">03</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Match pool → startup</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Pick a host startup; the shared pool re-ranks against it. Every row carries a score dial and expands in place into its fit reasons — the same row can also promote itself into the full drawer. Five frames trace the whole arc.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="3a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3a</div><div style="font:500 14px/1 'General Sans',system-ui">Pre-match — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="pre" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Idle:</b> the dashed empty dial rotates one full turn every 24s — the only ambient motion in the product. On “Rank for…”, it becomes the header dial via shared element while the copy block fades out 8px upward.</div>
+      </div>
+      <div id="3b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3b</div><div style="font:500 14px/1 'General Sans',system-ui">Scoring · skeleton — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="loading" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Scoring:</b> seven skeleton rows at descending opacity imply depth beyond the fold. The subline is a live count (“Scoring 612 applicants…”) that ticks, so progress is legible without a bar or spinner.</div>
+      </div>
+      <div id="3c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3c</div><div style="font:500 14px/1 'General Sans',system-ui">Results staggering in — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="staggering" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Arrival (frozen mid-transition):</b> rows translateY 10px → 0 with opacity 0 → 1, 28ms apart. Each dial arc sweeps 0 → value over 520ms on ease-out; the numeral counts up in step with its arc. Authenticity pills scale 0.94 → 1 at 60% of the row's own progress.</div>
+      </div>
+      <div id="3d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3d</div><div style="font:500 14px/1 'General Sans',system-ui">Ranked results — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="results" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Settled:</b> row hover tints the surface 3% and reveals the chevron at full opacity in 120ms — the row itself never moves, so pointer aim into the chevron is stable.</div>
+      </div>
+      <div id="3e" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3e</div><div style="font:500 14px/1 'General Sans',system-ui">Row expanded · fit reasons — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="expanded" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Expand:</b> height animates to auto on the default spring (220ms); the three reason cards fade up 6px, 40ms apart, starting at 50% of the expansion. Chevron rotates 180°. Rows below reflow with FLIP — they translate, they do not re-render.</div>
+      </div>
+      <div id="3f" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3f</div><div style="font:500 14px/1 'General Sans',system-ui">Drawer open from row — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="drawer" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Shared element:</b> the row's 36px dial flies to the drawer's 88px dial along a single arc — one element, scaled, never cross-faded. The name travels with it and settles into Fraunces 28px. Panel enters from +32px x with the scrim at 0 → full over 160ms. Esc reverses the exact same path.</div>
+      </div>
+      <div id="3g" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3g</div><div style="font:500 14px/1 'General Sans',system-ui">Pre-match — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="pre" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="3h" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3h</div><div style="font:500 14px/1 'General Sans',system-ui">Scoring · skeleton — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="loading" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="3i" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3i</div><div style="font:500 14px/1 'General Sans',system-ui">Results staggering in — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="staggering" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="3j" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3j</div><div style="font:500 14px/1 'General Sans',system-ui">Ranked results — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="results" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="3k" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3k</div><div style="font:500 14px/1 'General Sans',system-ui">Row expanded — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="expanded" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="3l" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">3l</div><div style="font:500 14px/1 'General Sans',system-ui">Drawer open — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="drawer" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="04 Authenticity threshold" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="height:24px;padding:0 10px;border-radius:999px;background:#2743E0;color:#fff;font:500 12px/24px 'General Sans',system-ui">Hero</div>
+        <div style="font:500 12px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:#6B6B72">AI authenticity</div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">04</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Threshold slider</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Every candidate carries a “% AI-written” badge on the green → amber → red scale, computed from screening answers and cover letter. The slider sets the hide-above line: strict removes rows from the ranking, permissive keeps them and flags them red.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="4a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">4a</div><div style="font:500 14px/1 'General Sans',system-ui">Threshold 20% · strict — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="strict" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Drag down:</b> hidden rows collapse height to 0 while fading, 20ms apart from the bottom up; survivors renumber with a 6px vertical FLIP and the rank numerals crossfade. Header count and the banner text retarget continuously as the knob moves — the list follows the thumb, it does not wait for release.</div>
+      </div>
+      <div id="4b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">4b</div><div style="font:500 14px/1 'General Sans',system-ui">Threshold 100% · permissive, flagged — light</div></div>
+        <dc-import name="MatchPool" theme="light" state="open" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Drag up:</b> returning rows expand from 0 height and land already at their new rank; the red flag tint washes in over 180ms and the “Signals” cell crossfades to “Flagged · review answers” for anything at 50% or above. Slider knob itself has no spring — it is 1:1 with the pointer.</div>
+      </div>
+      <div id="4c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">4c</div><div style="font:500 14px/1 'General Sans',system-ui">Threshold 20% · strict — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="strict" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+      <div id="4d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">4d</div><div style="font:500 14px/1 'General Sans',system-ui">Threshold 100% · permissive — dark</div></div>
+        <dc-import name="MatchPool" theme="dark" state="open" style="width:1280px;height:860px" hint-size="1280px,860px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="05 Candidate drawer" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">05</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Candidate detail drawer</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">560px panel, arrived at from the row via shared element (<a href="#3f">3f</a>). Weighted fit reasons first, then screening answers with per-answer authenticity, then the resume preview. Actions sit above the fold, permanently.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start">
+      <div id="5a" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">5a</div><div style="font:500 14px/1 'General Sans',system-ui">Drawer — light</div></div>
+        <dc-import name="CandidateDrawer" theme="light" style="width:560px;height:860px" hint-size="560px,860px"></dc-import>
+      </div>
+      <div id="5b" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">5b</div><div style="font:500 14px/1 'General Sans',system-ui">Drawer — dark</div></div>
+        <dc-import name="CandidateDrawer" theme="dark" style="width:560px;height:860px" hint-size="560px,860px"></dc-import>
+      </div>
+      <div style="width:320px;display:flex;flex-direction:column;gap:16px;padding-top:38px">
+        <div style="font:500 11px/1 'General Sans',system-ui;letter-spacing:.12em;text-transform:uppercase;color:#6B6B72">Motion — drawer</div>
+        <sc-for list="{{ notes5 }}" as="n" hint-placeholder-count="5">
+          <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:4px">
+            <div style="font:500 13px/1.3 'General Sans',system-ui">{{ n.t }}</div>
+            <div style="font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52">{{ n.b }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="06 Public application" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">06</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">Public application page</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">What the intern sees: one 680px column, only the fields the recruiter enabled, required resume dropzone, optional cover letter, and every screening question mandatory. Calm enough to be trusted with a resume.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="6a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6a</div><div style="font:500 14px/1 'General Sans',system-ui">Empty · first field focused — light</div></div>
+        <dc-import name="ApplyPage" theme="light" state="empty" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Focus:</b> border to accent plus a 3px accent-at-8% ring, 120ms, no scale. Submit stays visibly disabled with a live count of what's missing — never a shake, never an error state before the first attempt.</div>
+      </div>
+      <div id="6b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6b</div><div style="font:500 14px/1 'General Sans',system-ui">Resume drag-over — light</div></div>
+        <dc-import name="ApplyPage" theme="light" state="dropping" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Drag-over:</b> dashed border becomes 1.5px solid accent with an accent-8% wash; the icon tile fills accent and the label crossfades to the file name. Zone grows 0px — padding compensates for the thicker border so nothing below shifts.</div>
+      </div>
+      <div id="6c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6c</div><div style="font:500 14px/1 'General Sans',system-ui">Completed · ready to submit — light</div></div>
+        <dc-import name="ApplyPage" theme="light" state="filled" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Upload settled:</b> icon tile crossfades to green, sub-label swaps to size and parse status. Progress bar in the header animates its width on the default spring. Submit crosses from disabled tint to solid accent in 140ms once the last requirement clears.</div>
+      </div>
+      <div id="6d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6d</div><div style="font:500 14px/1 'General Sans',system-ui">Empty — dark</div></div>
+        <dc-import name="ApplyPage" theme="dark" state="empty" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+      </div>
+      <div id="6e" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6e</div><div style="font:500 14px/1 'General Sans',system-ui">Resume drag-over — dark</div></div>
+        <dc-import name="ApplyPage" theme="dark" state="dropping" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+      </div>
+      <div id="6f" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">6f</div><div style="font:500 14px/1 'General Sans',system-ui">Completed — dark</div></div>
+        <dc-import name="ApplyPage" theme="dark" state="filled" style="width:1280px;height:960px" hint-size="1280px,960px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="07 Command palette" style="display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:1120px">
+      <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#6B6B72">07</div><div style="font-family:Fraunces,Georgia,serif;font-size:40px;line-height:1;letter-spacing:-.025em">⌘K command palette</div></div>
+      <div style="font:400 15px/1.6 'General Sans',system-ui;color:#4A4A52;max-width:68ch">Startups, candidates and actions in one list. Running a match and setting the authenticity threshold are both reachable without touching the mouse.</div>
+    </div>
+    <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap;max-width:2760px">
+      <div id="7a" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">7a</div><div style="font:500 14px/1 'General Sans',system-ui">Open · recents — light</div></div>
+        <dc-import name="CommandPalette" theme="light" state="default" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Open:</b> panel scales 0.98 → 1 with 6px downward travel, 180ms; scrim 0 → full in 120ms. Rows do not stagger on open — the list must be readable on frame one.</div>
+      </div>
+      <div id="7b" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">7b</div><div style="font:500 14px/1 'General Sans',system-ui">Typing “sadeem” — light</div></div>
+        <dc-import name="CommandPalette" theme="light" state="typing" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+        <div style="border-left:2px solid #2743E0;padding:2px 0 2px 14px;font:400 13px/1.55 'General Sans',system-ui;color:#4A4A52"><b style="font-weight:500;color:#16161A">Filtering:</b> panel height animates on the default spring; group headers and rows crossfade in place, no vertical travel. The selection bar is a single element that slides between rows in 90ms — it never blinks off.</div>
+      </div>
+      <div id="7c" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">7c</div><div style="font:500 14px/1 'General Sans',system-ui">Open · recents — dark</div></div>
+        <dc-import name="CommandPalette" theme="dark" state="default" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+      </div>
+      <div id="7d" style="display:flex;flex-direction:column;gap:14px;width:1280px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="height:24px;padding:0 9px;border-radius:999px;background:#16161A;color:#fff;font:500 12px/24px 'General Sans',system-ui">7d</div><div style="font:500 14px/1 'General Sans',system-ui">Typing “sadeem” — dark</div></div>
+        <dc-import name="CommandPalette" theme="dark" state="typing" style="width:1280px;height:800px" hint-size="1280px,800px"></dc-import>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      notes0: [
+        { t:'Score dial', b:'Arc sweeps 0 → value over 520ms, ease-out; the Fraunces numeral counts up on the same curve and lands on the final digit as the arc closes.' },
+        { t:'Authenticity pill', b:'Colour interpolates along the green→amber→red ramp rather than snapping between steps — a value change of 3% is visible as a shift in hue, not a jump.' },
+        { t:'Toggles & checkboxes', b:'Knob and check use the default spring; the surrounding label crossfades ink↔secondary over 120ms.' },
+        { t:'Theme switch', b:'All tokens crossfade over 200ms with no layout change. Dial arcs and dividers are token-driven, so nothing redraws.' }
+      ],
+      notes5: [
+        { t:'Arrival', b:'Shared-element dial and name from the row; the rest of the panel content fades up 8px, 40ms behind the panel edge.' },
+        { t:'Tab change', b:'Underline slides between tabs in 140ms; panels crossfade with no height animation — tab bodies are pre-measured to the same minimum height.' },
+        { t:'Fit reasons', b:'Weight numerals count up from 0 on first open only. Re-opening the same candidate shows them settled.' },
+        { t:'↑ ↓ navigation', b:'Content crossfades in place while the dial re-sweeps to the new value; the panel frame never moves between candidates.' },
+        { t:'Dismiss', b:'Esc, scrim click and the chevron all reverse the entry path exactly — the dial flies home to its row.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
