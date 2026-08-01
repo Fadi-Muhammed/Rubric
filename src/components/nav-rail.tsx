@@ -7,7 +7,7 @@ import {
   Sparkles,
   LayoutGrid,
   SwatchBook,
-  Command,
+  Search,
   Sun,
   Moon,
   Monitor,
@@ -114,7 +114,7 @@ export function NavRail() {
         })}
       </nav>
 
-      {/* Bottom: theme + Cmd-K hint */}
+      {/* Bottom: theme + Ctrl-K hint */}
       <div className="flex flex-col gap-1 border-t border-hairline p-3">
         <button
           onClick={() => setTheme(themeCycle[theme])}
@@ -127,12 +127,12 @@ export function NavRail() {
           </Label>
         </button>
         <div className="flex h-11 items-center gap-3 overflow-hidden rounded-md px-[10px] text-secondary">
-          <Command className="h-5 w-5 shrink-0" strokeWidth={1.5} />
+          <Search className="h-5 w-5 shrink-0" strokeWidth={1.5} />
           <Label show={expanded}>
             <span className="flex items-center gap-2 text-sm">
               Search
               <kbd className="rounded border border-hairline bg-canvas px-1.5 py-0.5 font-mono text-[11px] text-secondary">
-                ⌘K
+                Ctrl K
               </kbd>
             </span>
           </Label>

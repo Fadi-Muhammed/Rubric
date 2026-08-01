@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { ChevronsUpDown, Command } from "lucide-react";
+import { ChevronsUpDown, Search } from "lucide-react";
 import { NavRail } from "./nav-rail";
 
 /** Recruiter-facing chrome: icon rail + slim top strip + routed content. */
@@ -25,8 +25,8 @@ export function AppShell() {
             aria-label="Open command palette"
             className="flex items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1.5 text-secondary outline-none transition-colors hover:text-ink focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <Command className="h-4 w-4" strokeWidth={1.5} />
-            <kbd className="font-mono text-[11px]">⌘K</kbd>
+            <Search className="h-4 w-4" strokeWidth={1.5} />
+            <kbd className="font-mono text-[11px]">Ctrl K</kbd>
           </button>
         </header>
 
