@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Rubric design tokens — "the living rubric"
+   Source of truth: BUILD.md §12 + mockups/StyleTile.dc.html
+   ============================================================ */
+:root {
+  /* Light theme */
+  --canvas: #fafaf7;        /* warm off-white, not pure white */
+  --surface: #ffffff;
+  --elevated: #ffffff;
+  --ink: #16161a;           /* near-black warm ink */
+  --secondary: #6b6b72;
+  --hairline: rgba(0, 0, 0, 0.08);
+  --accent: #2743e0;        /* deep cobalt — actions only */
+  --accent-hover: #1f37bd;
+  --accent-soft: rgba(39, 67, 224, 0.1);
+  --skeleton: #f0f0ea;
+
+  /* AI-authenticity diverging scale (different hue from accent) */
+  --auth-green: #16a34a;    /* human */
+  --auth-amber: #f59e0b;
+  --auth-red: #ef4444;      /* AI */
+
+  color-scheme: light;
+}
+
+.dark {
+  --canvas: #0e0e11;
+  --surface: #17171b;
+  --elevated: #1e1e24;
+  --ink: #f4f4f2;
+  --secondary: #a0a0a8;
+  --hairline: rgba(255, 255, 255, 0.09);
+  --accent: #6b82ff;
+  --accent-hover: #8296ff;
+  --accent-soft: rgba(107, 130, 255, 0.14);
+  --skeleton: #1e1e24;
+
+  --auth-green: #22c55e;
+  --auth-amber: #fbbf24;
+  --auth-red: #f87171;
+
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--hairline);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: "General Sans", "Satoshi", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  transition: background-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Editorial defaults */
+::selection {
+  background: var(--accent-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
