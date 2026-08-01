@@ -7,7 +7,6 @@ import {
   Sparkles,
   LayoutGrid,
   Gem,
-  SwatchBook,
   Search,
   Sun,
   Moon,
@@ -28,7 +27,6 @@ const items = [
   { to: "/match", label: "Match Pool", Icon: Sparkles, match: "/match" },
   { to: "/allocation", label: "Allocation Board", Icon: LayoutGrid },
   { to: "/gems", label: "Hidden Gems", Icon: Gem },
-  { to: "/style", label: "Style Guide", Icon: SwatchBook },
 ];
 
 /** Slide-in label that only renders while the rail is expanded. */

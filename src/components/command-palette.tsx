@@ -105,7 +105,6 @@ export function CommandPalette() {
       { id: "nav-allocation", group: "Go to", glyph: "AB", title: "Allocation Board", sub: "Assign the whole pool", keywords: "assign allocate columns", run: () => navigate("/allocation") },
       { id: "nav-gems", group: "Go to", glyph: "◆", title: "Hidden Gems", sub: "Strong fits a GPA filter would miss", keywords: "hidden gems overlooked", run: () => navigate("/gems") },
       { id: "nav-intake", group: "Go to", glyph: "+", title: "Intake Builder", sub: "3-step role builder", keywords: "new role add startup create", run: () => navigate("/intake") },
-      { id: "nav-style", group: "Go to", glyph: "SG", title: "Style Guide", sub: "The living rubric", keywords: "design tokens", run: () => navigate("/style") },
     ];
     const startupCmds: Command[] = startups.map((s) => {
       const count = getMatchesForStartup(s.id).length;
