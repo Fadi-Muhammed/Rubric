@@ -1,16 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-motion";
-import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal } from "lucide-react";
+import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal, UserX } from "lucide-react";
 import {
   getStartup,
   getMatchesForStartup,
   setShortlistStatus,
+  rejectNonShortlisted,
 } from "@/lib/data";
 import type { RankedMatch, ShortlistStatus } from "@/data/types";
 import { ScoreDial } from "@/components/score-dial";
 import { AuthenticityBadge } from "@/components/authenticity-badge";
 import { CandidateDrawer } from "@/components/candidate-drawer";
+import { RejectDialog } from "@/components/reject-dialog";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
@@ -48,6 +50,7 @@ export default function MatchPool() {
   const [gemsOnly, setGemsOnly] = useState(false);
   const [shortlistedOnly, setShortlistedOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [rejectOpen, setRejectOpen] = useState(false);
 
   useEffect(() => {
     if (!startupId) return;
@@ -83,6 +86,29 @@ export default function MatchPool() {
 
   const gemCount = matches.filter((m) => m.isHiddenGem).length;
   const shortlistedCount = matches.filter((m) => m.shortlistStatus === "shortlisted").length;
+
+  // Candidates the "Reject all (keep shortlisted)" action targets: everyone
+  // still under review (already-rejected are left as-is).
+  const rejectTargets = useMemo(
+    () => matches.filter((m) => m.shortlistStatus === "under_review"),
+    [matches]
+  );
+  const canReject = shortlistedCount > 0 && rejectTargets.length > 0;
+
+  // Commit the bulk rejection through the data layer, then sync local state
+  // so the rows reflect it immediately. (The dialog shows the simulated
+  // "N emails sent" success — nothing actually leaves the browser.)
+  const confirmReject = () => {
+    if (!startupId) return;
+    const rejectedIds = new Set(rejectNonShortlisted(startupId));
+    setMatches((prev) =>
+      prev.map((m) =>
+        rejectedIds.has(m.applicationId) && m.startupId === startupId
+          ? { ...m, shortlistStatus: "rejected" as ShortlistStatus }
+          : m
+      )
+    );
+  };
 
   // The drawer reads the *live* match from state (so its shortlist toggle
   // stays in sync with the row). Rank reflects position in the current view.
@@ -127,6 +153,28 @@ export default function MatchPool() {
               {gemCount} hidden {gemCount === 1 ? "gem" : "gems"} surfaced.
             </p>
           </div>
+
+          <button
+            onClick={() => setRejectOpen(true)}
+            disabled={!canReject}
+            title={
+              shortlistedCount === 0
+                ? "Shortlist at least one candidate first"
+                : rejectTargets.length === 0
+                ? "No candidates left to reject"
+                : `Reject ${rejectTargets.length} non-shortlisted`
+            }
+            className={cn(
+              "flex h-10 items-center gap-2 rounded-lg border px-4 text-meta font-medium transition-colors",
+              canReject
+                ? "border-auth-red text-auth-red hover:bg-auth-red-soft"
+                : "cursor-not-allowed border-hairline text-secondary opacity-60"
+            )}
+          >
+            <UserX className="h-4 w-4" strokeWidth={1.8} />
+            Reject all
+            <span className="opacity-70">(keep shortlisted)</span>
+          </button>
         </div>
       </header>
 
@@ -225,6 +273,18 @@ export default function MatchPool() {
           )}
         </AnimatePresence>
       </LayoutGroup>
+
+      <AnimatePresence>
+        {rejectOpen && (
+          <RejectDialog
+            startup={startup}
+            targets={rejectTargets}
+            shortlistedCount={shortlistedCount}
+            onCancel={() => setRejectOpen(false)}
+            onConfirm={confirmReject}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -250,6 +310,7 @@ function CandidateRow({
 }) {
   const { application: app } = match;
   const shortlisted = match.shortlistStatus === "shortlisted";
+  const rejected = match.shortlistStatus === "rejected";
   const flagged = match.authenticityScore >= 66;
 
   return (
@@ -275,7 +336,8 @@ function CandidateRow({
       className={cn(
         "group cursor-pointer border-b border-hairline transition-colors",
         selected ? "bg-accent-soft shadow-[inset_2px_0_0_var(--accent)]" : "hover:bg-row-hover",
-        flagged && !selected && "bg-auth-red-soft"
+        flagged && !selected && !rejected && "bg-auth-red-soft",
+        rejected && !selected && "opacity-55"
       )}
     >
       <div className={cn(GRID, "px-2 py-3.5")}>
@@ -293,9 +355,14 @@ function CandidateRow({
         <div className="flex min-w-0 flex-col gap-1">
           <div className="flex items-center gap-2">
             <span className="truncate text-body font-medium">{app.name}</span>
-            {match.isHiddenGem && (
+            {match.isHiddenGem && !rejected && (
               <span className="flex flex-none items-center gap-1 rounded-full bg-accent-soft px-2 py-0.5 text-eyebrow font-medium text-accent">
                 <Gem className="h-3 w-3" strokeWidth={1.8} /> Hidden gem
+              </span>
+            )}
+            {rejected && (
+              <span className="flex flex-none items-center gap-1 rounded-full bg-auth-red-soft px-2 py-0.5 text-eyebrow font-medium text-auth-red">
+                <UserX className="h-3 w-3" strokeWidth={1.8} /> Rejected
               </span>
             )}
           </div>
