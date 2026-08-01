@@ -31,3 +31,6 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# analysis build artifact
+scripts/.seed.mjs
