@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { ChevronsUpDown, Search } from "lucide-react";
 import { NavRail } from "./nav-rail";
+import { CommandPalette, OPEN_EVENT } from "./command-palette";
 
 /** Recruiter-facing chrome: icon rail + slim top strip + routed content. */
 export function AppShell() {
@@ -23,6 +24,7 @@ export function AppShell() {
 
           <button
             aria-label="Open command palette"
+            onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}
             className="flex items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1.5 text-secondary outline-none transition-colors hover:text-ink focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Search className="h-4 w-4" strokeWidth={1.5} />
@@ -34,6 +36,8 @@ export function AppShell() {
           <Outlet />
         </main>
       </div>
+
+      <CommandPalette />
     </div>
   );
 }

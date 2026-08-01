@@ -205,6 +205,11 @@ export function setAllocation(applicationId: string, startupId: string): Allocat
   return alloc;
 }
 
+/** Remove a candidate's allocation (drag back to the bench on the board). */
+export function removeAllocation(applicationId: string): void {
+  db.allocations = db.allocations.filter((a) => a.applicationId !== applicationId);
+}
+
 export function clearAllocations(): void {
   db.allocations = [];
 }

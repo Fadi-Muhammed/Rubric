@@ -4,6 +4,7 @@ import Dashboard from "@/pages/Dashboard";
 import IntakeBuilder from "@/pages/IntakeBuilder";
 import MatchPool from "@/pages/MatchPool";
 import Allocation from "@/pages/Allocation";
+import HiddenGems from "@/pages/HiddenGems";
 import Apply from "@/pages/Apply";
 import StyleGuide from "@/pages/StyleGuide";
 import Debug from "@/pages/Debug";
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/intake" element={<IntakeBuilder />} />
           <Route path="/match/:startupId" element={<MatchPool />} />
           <Route path="/allocation" element={<Allocation />} />
+          <Route path="/gems" element={<HiddenGems />} />
           <Route path="/style" element={<StyleGuide />} />
           <Route path="/debug" element={<Debug />} />
         </Route>

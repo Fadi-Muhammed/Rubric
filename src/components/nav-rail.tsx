@@ -6,6 +6,7 @@ import {
   FilePlus2,
   Sparkles,
   LayoutGrid,
+  Gem,
   SwatchBook,
   Search,
   Sun,
@@ -13,6 +14,7 @@ import {
   Monitor,
 } from "lucide-react";
 import { useTheme, type Theme } from "./theme-provider";
+import { OPEN_EVENT } from "./command-palette";
 import { cn } from "@/lib/utils";
 
 const COLLAPSED = 64;
@@ -25,6 +27,7 @@ const items = [
   { to: "/intake", label: "Intake Builder", Icon: FilePlus2 },
   { to: "/match/demo", label: "Match Pool", Icon: Sparkles, match: "/match" },
   { to: "/allocation", label: "Allocation Board", Icon: LayoutGrid },
+  { to: "/gems", label: "Hidden Gems", Icon: Gem },
   { to: "/style", label: "Style Guide", Icon: SwatchBook },
 ];
 
@@ -126,7 +129,11 @@ export function NavRail() {
             <span className="capitalize">{theme}</span>
           </Label>
         </button>
-        <div className="flex h-11 items-center gap-3 overflow-hidden rounded-md px-[10px] text-secondary">
+        <button
+          onClick={() => window.dispatchEvent(new Event(OPEN_EVENT))}
+          aria-label="Open command palette"
+          className="flex h-11 items-center gap-3 overflow-hidden rounded-md px-[10px] text-secondary outline-none transition-colors hover:bg-row-hover hover:text-ink focus-visible:ring-2 focus-visible:ring-accent"
+        >
           <Search className="h-5 w-5 shrink-0" strokeWidth={1.5} />
           <Label show={expanded}>
             <span className="flex items-center gap-2 text-sm">
@@ -136,7 +143,7 @@ export function NavRail() {
               </kbd>
             </span>
           </Label>
-        </div>
+        </button>
       </div>
     </motion.aside>
   );
