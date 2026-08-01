@@ -28,8 +28,15 @@ export const hasSupabase = Boolean(url && anonKey);
 export const USE_MOCK =
   import.meta.env.VITE_USE_MOCK === "false" && hasSupabase ? false : true;
 
-/** Configured Edge Function endpoint for AI assists, if any. */
-export const AI_ENDPOINT = import.meta.env.VITE_AI_ENDPOINT as string | undefined;
+/**
+ * Edge Function endpoint for AI assists. Prefer the env var, but fall back to
+ * the deployed function URL so production (e.g. Vercel without env vars set)
+ * still reaches the model. This is only a public, unauthenticated URL — no key
+ * is exposed here; the OpenRouter secret stays server-side in the function.
+ */
+export const AI_ENDPOINT =
+  (import.meta.env.VITE_AI_ENDPOINT as string | undefined) ||
+  "https://ggbrjebcoajynwgkcfif.supabase.co/functions/v1/ai";
 
 /** Lazily-created singleton client. Null when Supabase isn't configured. */
 export const supabase: SupabaseClient | null = hasSupabase
