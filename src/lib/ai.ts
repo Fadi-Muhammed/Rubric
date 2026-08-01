@@ -1,12 +1,27 @@
 /* ============================================================
-   Mocked AI assist layer.
-   These return convincing canned output after a short, realistic
-   delay so the Intake Builder's "Improve with AI" and "Suggest
-   questions" actions feel live. NO network / NO API keys — the real
-   Claude calls swap in here at Step 10 without touching the UI.
+   AI assist layer.
+   "Improve with AI" and "Suggest questions" for the Intake Builder.
+
+   When VITE_AI_ENDPOINT points at the deployed Supabase Edge Function
+   (supabase/functions/ai), these call OpenRouter server-side — the API
+   key never touches the browser. With no endpoint configured they fall
+   back to the deterministic mock below, so the demo always works offline.
    ============================================================ */
 
+import { AI_ENDPOINT } from "./supabase";
+
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** POST a task to the AI Edge Function. Throws on any non-OK response. */
+async function callAi<T>(payload: Record<string, unknown>): Promise<T> {
+  const res = await fetch(AI_ENDPOINT as string, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error(`AI endpoint ${res.status}`);
+  return (await res.json()) as T;
+}
 
 /** Simulated model latency (kept short so the demo stays snappy). */
 const LATENCY = 1200;
@@ -24,6 +39,22 @@ export async function improveDescription(
   current: string,
   ctx: ImproveContext = {}
 ): Promise<string> {
+  // Real path: OpenRouter via the Edge Function. Fall back to the mock on
+  // any failure so the demo never dead-ends.
+  if (AI_ENDPOINT) {
+    try {
+      const { text } = await callAi<{ text: string }>({
+        task: "improve",
+        current,
+        roleTitle: ctx.roleTitle,
+        host: ctx.host,
+      });
+      if (text?.trim()) return text.trim();
+    } catch {
+      /* fall through to mock */
+    }
+  }
+
   await wait(LATENCY);
 
   const role = ctx.roleTitle?.trim() || "this role";
@@ -68,6 +99,20 @@ export interface SuggestContext {
 export async function suggestScreeningQuestions(
   ctx: SuggestContext = {}
 ): Promise<string[]> {
+  if (AI_ENDPOINT) {
+    try {
+      const { questions } = await callAi<{ questions: string[] }>({
+        task: "suggest",
+        roleTitle: ctx.roleTitle,
+        description: ctx.description,
+        qualifications: ctx.qualifications,
+      });
+      if (questions?.length) return questions.slice(0, 4);
+    } catch {
+      /* fall through to mock */
+    }
+  }
+
   await wait(LATENCY);
 
   const role = ctx.roleTitle?.trim();
