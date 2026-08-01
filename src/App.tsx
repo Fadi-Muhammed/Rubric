@@ -3,6 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import Dashboard from "@/pages/Dashboard";
 import IntakeBuilder from "@/pages/IntakeBuilder";
 import MatchPool from "@/pages/MatchPool";
+import MatchPoolIndex from "@/pages/MatchPoolIndex";
 import Allocation from "@/pages/Allocation";
 import HiddenGems from "@/pages/HiddenGems";
 import Apply from "@/pages/Apply";
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/intake" element={<IntakeBuilder />} />
+          <Route path="/match" element={<MatchPoolIndex />} />
           <Route path="/match/:startupId" element={<MatchPool />} />
           <Route path="/allocation" element={<Allocation />} />
           <Route path="/gems" element={<HiddenGems />} />

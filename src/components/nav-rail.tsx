@@ -25,7 +25,7 @@ const spring = { type: "spring" as const, stiffness: 300, damping: 30 };
 const items = [
   { to: "/dashboard", label: "Dashboard", Icon: LayoutDashboard },
   { to: "/intake", label: "Intake Builder", Icon: FilePlus2 },
-  { to: "/match/demo", label: "Match Pool", Icon: Sparkles, match: "/match" },
+  { to: "/match", label: "Match Pool", Icon: Sparkles, match: "/match" },
   { to: "/allocation", label: "Allocation Board", Icon: LayoutGrid },
   { to: "/gems", label: "Hidden Gems", Icon: Gem },
   { to: "/style", label: "Style Guide", Icon: SwatchBook },
