@@ -1,18 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-motion";
-import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal, UserX } from "lucide-react";
+import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal, UserX, Mail } from "lucide-react";
 import {
   getStartup,
   getMatchesForStartup,
   setShortlistStatus,
-  rejectNonShortlisted,
 } from "@/lib/data";
 import type { RankedMatch, ShortlistStatus } from "@/data/types";
 import { ScoreDial } from "@/components/score-dial";
 import { AuthenticityBadge } from "@/components/authenticity-badge";
 import { CandidateDrawer } from "@/components/candidate-drawer";
-import { RejectDialog } from "@/components/reject-dialog";
+import { InviteDialog } from "@/components/invite-dialog";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
@@ -50,7 +49,7 @@ export default function MatchPool() {
   const [gemsOnly, setGemsOnly] = useState(false);
   const [shortlistedOnly, setShortlistedOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [rejectOpen, setRejectOpen] = useState(false);
+  const [inviteOpen, setInviteOpen] = useState(false);
 
   useEffect(() => {
     if (!startupId) return;
@@ -87,28 +86,14 @@ export default function MatchPool() {
   const gemCount = matches.filter((m) => m.isHiddenGem).length;
   const shortlistedCount = matches.filter((m) => m.shortlistStatus === "shortlisted").length;
 
-  // Candidates the "Reject all (keep shortlisted)" action targets: everyone
-  // still under review (already-rejected are left as-is).
-  const rejectTargets = useMemo(
-    () => matches.filter((m) => m.shortlistStatus === "under_review"),
+  // Candidates the "Invite shortlisted" action targets: everyone the recruiter
+  // has starred for this role. The dialog previews an interview invitation and
+  // shows a simulated "N invitations sent" — nothing actually leaves the browser.
+  const inviteTargets = useMemo(
+    () => matches.filter((m) => m.shortlistStatus === "shortlisted"),
     [matches]
   );
-  const canReject = shortlistedCount > 0 && rejectTargets.length > 0;
-
-  // Commit the bulk rejection through the data layer, then sync local state
-  // so the rows reflect it immediately. (The dialog shows the simulated
-  // "N emails sent" success — nothing actually leaves the browser.)
-  const confirmReject = () => {
-    if (!startupId) return;
-    const rejectedIds = new Set(rejectNonShortlisted(startupId));
-    setMatches((prev) =>
-      prev.map((m) =>
-        rejectedIds.has(m.applicationId) && m.startupId === startupId
-          ? { ...m, shortlistStatus: "rejected" as ShortlistStatus }
-          : m
-      )
-    );
-  };
+  const canInvite = inviteTargets.length > 0;
 
   // The drawer reads the *live* match from state (so its shortlist toggle
   // stays in sync with the row). Rank reflects position in the current view.
@@ -155,25 +140,25 @@ export default function MatchPool() {
           </div>
 
           <button
-            onClick={() => setRejectOpen(true)}
-            disabled={!canReject}
+            onClick={() => setInviteOpen(true)}
+            disabled={!canInvite}
             title={
-              shortlistedCount === 0
-                ? "Shortlist at least one candidate first"
-                : rejectTargets.length === 0
-                ? "No candidates left to reject"
-                : `Reject ${rejectTargets.length} non-shortlisted`
+              canInvite
+                ? `Invite ${inviteTargets.length} shortlisted to interview`
+                : "Shortlist at least one candidate first"
             }
             className={cn(
-              "flex h-10 items-center gap-2 rounded-lg border px-4 text-meta font-medium transition-colors",
-              canReject
-                ? "border-auth-red text-auth-red hover:bg-auth-red-soft"
-                : "cursor-not-allowed border-hairline text-secondary opacity-60"
+              "flex h-10 items-center gap-2 rounded-lg px-4 text-meta font-medium transition-colors",
+              canInvite
+                ? "bg-accent text-white hover:bg-accent-hover"
+                : "cursor-not-allowed border border-hairline text-secondary opacity-60"
             )}
           >
-            <UserX className="h-4 w-4" strokeWidth={1.8} />
-            Reject all
-            <span className="opacity-70">(keep shortlisted)</span>
+            <Mail className="h-4 w-4" strokeWidth={1.8} />
+            Invite shortlisted
+            {inviteTargets.length > 0 && (
+              <span className="opacity-80">({inviteTargets.length})</span>
+            )}
           </button>
         </div>
       </header>
@@ -275,13 +260,11 @@ export default function MatchPool() {
       </LayoutGroup>
 
       <AnimatePresence>
-        {rejectOpen && (
-          <RejectDialog
+        {inviteOpen && (
+          <InviteDialog
             startup={startup}
-            targets={rejectTargets}
-            shortlistedCount={shortlistedCount}
-            onCancel={() => setRejectOpen(false)}
-            onConfirm={confirmReject}
+            targets={inviteTargets}
+            onCancel={() => setInviteOpen(false)}
           />
         )}
       </AnimatePresence>
