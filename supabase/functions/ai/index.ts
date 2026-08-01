@@ -59,6 +59,8 @@ function buildPrompt(b: Body): { system: string; user: string } {
     system:
       "You are a recruiting screening designer. Propose sharp screening " +
       "questions that reveal judgement, depth, and authenticity — not trivia. " +
+      "Keep each question to one focused sentence of roughly 15–25 words: " +
+      "concise and direct, but not terse or generic. " +
       "Return ONLY a JSON array of 4 question strings, nothing else.",
     user:
       `Role: ${role}\n` +
