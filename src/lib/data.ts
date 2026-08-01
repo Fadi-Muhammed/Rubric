@@ -4,6 +4,7 @@ import type {
   Cycle,
   Match,
   RankedMatch,
+  ScreeningQuestion,
   ShortlistStatus,
   Startup,
 } from "@/data/types";
@@ -33,6 +34,7 @@ const db = {
 };
 
 let seq = db.applications.length;
+let startupSeq = db.startups.length;
 
 /* ------------------------------ reads ------------------------------ */
 
@@ -157,6 +159,32 @@ export function addApplication(input: NewApplicationInput): Application {
   db.applications.push(app);
   for (const st of db.startups) db.matches.push(buildMatch(app, st));
   return app;
+}
+
+export type NewStartupInput = Omit<Startup, "id" | "cycleId" | "createdAt">;
+
+/**
+ * Add a host startup / role to the cycle and generate its matches against
+ * every existing candidate, so its Match Pool is populated immediately.
+ * Returns the created startup (its id backs the shareable /apply preview).
+ */
+export function addStartup(input: NewStartupInput): Startup {
+  startupSeq += 1;
+  const startup: Startup = {
+    ...input,
+    id: `st-new-${String(startupSeq).padStart(2, "0")}`,
+    cycleId: db.cycle.id,
+    createdAt: new Date().toISOString(),
+  };
+  db.startups.push(startup);
+  for (const app of db.applications) db.matches.push(buildMatch(app, startup));
+  return startup;
+}
+
+/** Replace the cycle's screening questions (re-normalizes sortOrder). */
+export function setScreeningQuestions(questions: ScreeningQuestion[]): ScreeningQuestion[] {
+  db.cycle.screeningQuestions = questions.map((q, i) => ({ ...q, sortOrder: i + 1 }));
+  return db.cycle.screeningQuestions;
 }
 
 /** Assign a candidate to a startup (used by the Allocation Board later). */
