@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-motion";
 import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal, UserX, Mail } from "lucide-react";
 import {
@@ -37,6 +37,10 @@ const GRID =
 
 export default function MatchPool() {
   const { startupId } = useParams();
+  // Deep-link support: /match/:startupId?open=<matchId> auto-opens that
+  // candidate's profile drawer (used by the Ctrl+K candidate search).
+  const [searchParams] = useSearchParams();
+  const openId = searchParams.get("open");
   const reduce = useReducedMotion();
 
   const startup = startupId ? getStartup(startupId) : undefined;
@@ -54,10 +58,13 @@ export default function MatchPool() {
   useEffect(() => {
     if (!startupId) return;
     setLoading(true);
-    setMatches(getMatchesForStartup(startupId));
+    const next = getMatchesForStartup(startupId);
+    setMatches(next);
+    // Auto-open a candidate when deep-linked from the command palette.
+    if (openId && next.some((m) => m.id === openId)) setSelectedId(openId);
     const t = setTimeout(() => setLoading(false), reduce ? 0 : 460);
     return () => clearTimeout(t);
-  }, [startupId, reduce]);
+  }, [startupId, reduce, openId]);
 
   const toggleShortlist = (m: RankedMatch) => {
     const next: ShortlistStatus =

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { Search } from "lucide-react";
-import { listStartups, getMatchesForStartup } from "@/lib/data";
+import { listStartups, getMatchesForStartup, listApplications, listMatches } from "@/lib/data";
 import { useTheme, type Theme } from "./theme-provider";
 import { cn } from "@/lib/utils";
 
@@ -120,6 +120,31 @@ export function CommandPalette() {
         run: () => navigate(`/match/${s.id}`),
       };
     });
+    // Candidate profiles — each jumps to its best-fit role's Match Pool and
+    // deep-opens the profile drawer (?open=<matchId>). Every candidate has a
+    // match against every startup, so the target row always resolves.
+    const allMatches = listMatches();
+    const bestByApp = new Map<string, (typeof allMatches)[number]>();
+    for (const m of allMatches) {
+      const cur = bestByApp.get(m.applicationId);
+      if (!cur || m.fitScore > cur.fitScore) bestByApp.set(m.applicationId, m);
+    }
+    const candidateCmds: Command[] = listApplications().map((a) => {
+      const best = bestByApp.get(a.id);
+      const st = best ? startups.find((s) => s.id === best.startupId) : undefined;
+      const initials = a.name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+      return {
+        id: `cand-${a.id}`,
+        group: "Candidates",
+        glyph: initials,
+        title: a.name,
+        sub: `${a.major} · GPA ${a.gpa.toFixed(1)}${st ? ` · best fit ${st.name.split(" ")[0]}` : ""}`,
+        hint: best ? `Fit ${best.fitScore}` : undefined,
+        keywords: `${a.skills.join(" ")} ${a.major} ${a.year} candidate applicant profile ${st?.name ?? ""}`,
+        run: () =>
+          best && st ? navigate(`/match/${st.id}?open=${best.id}`) : navigate("/gems"),
+      };
+    });
     const actions: Command[] = [
       { id: "act-new", group: "Actions", glyph: "+", title: "New role", sub: "Opens the 3-step builder", hint: "Ctrl N", keywords: "add startup create", run: () => navigate("/intake") },
       {
@@ -133,12 +158,13 @@ export function CommandPalette() {
         run: () => setTheme(themeCycle[theme]),
       },
     ];
-    return [...screens, ...startupCmds, ...actions];
+    return [...screens, ...startupCmds, ...candidateCmds, ...actions];
   }, [navigate, setTheme, theme]);
 
-  // Filter + rank. Empty query keeps stable authoring order.
+  // Filter + rank. Empty query keeps stable authoring order, but hides the long
+  // candidate list on open — candidates surface once the user starts typing.
   const filtered = useMemo(() => {
-    if (!query.trim()) return commands;
+    if (!query.trim()) return commands.filter((c) => c.group !== "Candidates");
     return commands
       .map((c) => ({ c, s: fuzzyScore(query, `${c.title} ${c.sub ?? ""} ${c.keywords ?? ""}`) }))
       .filter((x) => x.s >= 0)
