@@ -22,8 +22,12 @@ export default {
           green: "var(--auth-green)",
           amber: "var(--auth-amber)",
           red: "var(--auth-red)",
+          "green-soft": "var(--auth-green-soft)",
+          "amber-soft": "var(--auth-amber-soft)",
+          "red-soft": "var(--auth-red-soft)",
         },
         skeleton: "var(--skeleton)",
+        "row-hover": "var(--row-hover)",
       },
       fontFamily: {
         // Fraunces = display / big numbers ONLY. General Sans = all UI/body.

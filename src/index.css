@@ -23,6 +23,11 @@
   --auth-green: #16a34a;    /* human */
   --auth-amber: #f59e0b;
   --auth-red: #ef4444;      /* AI */
+  --auth-green-soft: rgba(22, 163, 74, 0.1);
+  --auth-amber-soft: rgba(245, 158, 11, 0.12);
+  --auth-red-soft: rgba(239, 68, 68, 0.1);
+
+  --row-hover: rgba(0, 0, 0, 0.025);
 
   color-scheme: light;
 }
@@ -42,6 +47,11 @@
   --auth-green: #22c55e;
   --auth-amber: #fbbf24;
   --auth-red: #f87171;
+  --auth-green-soft: rgba(34, 197, 94, 0.14);
+  --auth-amber-soft: rgba(251, 191, 36, 0.15);
+  --auth-red-soft: rgba(248, 113, 113, 0.14);
+
+  --row-hover: rgba(255, 255, 255, 0.04);
 
   color-scheme: dark;
 }
