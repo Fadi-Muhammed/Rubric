@@ -6,6 +6,7 @@ import MatchPool from "@/pages/MatchPool";
 import Allocation from "@/pages/Allocation";
 import Apply from "@/pages/Apply";
 import StyleGuide from "@/pages/StyleGuide";
+import Debug from "@/pages/Debug";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/match/:startupId" element={<MatchPool />} />
           <Route path="/allocation" element={<Allocation />} />
           <Route path="/style" element={<StyleGuide />} />
+          <Route path="/debug" element={<Debug />} />
         </Route>
 
         {/* Public candidate page — no chrome */}
