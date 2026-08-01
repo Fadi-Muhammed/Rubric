@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Wand2, RotateCcw, Flame, GripVertical, Users } from "lucide-react";
 import {
   listStartups,
@@ -9,8 +9,10 @@ import {
   setAllocation,
   removeAllocation,
   clearAllocations,
+  setShortlistStatus,
 } from "@/lib/data";
-import type { Application, Match } from "@/data/types";
+import type { Application, Match, RankedMatch } from "@/data/types";
+import { CandidateDrawer } from "@/components/candidate-drawer";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
@@ -77,6 +79,34 @@ export default function Allocation() {
   // Bumped on each auto-allocate so the reveal re-staggers.
   const [runId, setRunId] = useState(0);
   const [dragId, setDragId] = useState<string | null>(null);
+
+  // Click-to-inspect: which candidate's profile is open, and in which startup's
+  // context (a startup column uses that role; a bench card uses its best fit).
+  const [detail, setDetail] = useState<{ appId: string; stId: string } | null>(null);
+
+  const openDetail = (appId: string, colId: ColumnId) => {
+    const stId = colId === BENCH ? bestFit.get(appId)?.stId : colId;
+    if (stId) setDetail({ appId, stId });
+  };
+
+  // Build the RankedMatch + rank/total the drawer needs for the open candidate.
+  const detailView = useMemo(() => {
+    if (!detail) return null;
+    const startup = startups.find((s) => s.id === detail.stId);
+    const application = apps.find((a) => a.id === detail.appId);
+    const match = matchMap.get(`${detail.appId}|${detail.stId}`);
+    if (!startup || !application || !match) return null;
+    const ranked = allMatches
+      .filter((x) => x.startupId === detail.stId)
+      .sort((a, b) => b.fitScore - a.fitScore);
+    const rank = ranked.findIndex((x) => x.applicationId === detail.appId) + 1;
+    return {
+      startup,
+      match: { ...match, application } as RankedMatch,
+      rank,
+      total: ranked.length,
+    };
+  }, [detail, startups, apps, matchMap, allMatches]);
 
   const capacityOf = (colId: string) =>
     colId === BENCH ? Infinity : startups.find((s) => s.id === colId)?.capacity ?? 0;
@@ -223,6 +253,7 @@ export default function Allocation() {
                 setDragId(null);
                 handleDrop(appId, pt);
               }}
+              onOpen={() => openDetail(appId, BENCH)}
             />
           ))}
         </BoardColumn>
@@ -260,6 +291,7 @@ export default function Allocation() {
                       setDragId(null);
                       handleDrop(appId, pt);
                     }}
+                    onOpen={() => openDetail(appId, st.id)}
                   />
                 ))
               )}
@@ -280,6 +312,28 @@ export default function Allocation() {
         </span>
         <span className="text-secondary/80">Greedy assignment — intentionally not an optimizer.</span>
       </div>
+
+      {/* candidate profile — opens on click, drag still moves the card */}
+      <AnimatePresence>
+        {detailView && (
+          <CandidateDrawer
+            match={detailView.match}
+            startup={detailView.startup}
+            rank={detailView.rank}
+            total={detailView.total}
+            onClose={() => setDetail(null)}
+            onToggleShortlist={() => {
+              const next =
+                detailView.match.shortlistStatus === "shortlisted"
+                  ? "under_review"
+                  : "shortlisted";
+              setShortlistStatus(detailView.match.id, next);
+              // force detailView to recompute against the mutated match
+              setDetail((d) => (d ? { ...d } : d));
+            }}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -360,6 +414,7 @@ function CandidateCard({
   dragging,
   onDragStart,
   onDragEnd,
+  onOpen,
 }: {
   app: Application;
   colId: ColumnId;
@@ -372,8 +427,13 @@ function CandidateCard({
   dragging: boolean;
   onDragStart: () => void;
   onDragEnd: (point: { x: number; y: number }) => void;
+  onOpen: () => void;
 }) {
   const flagged = app.aiAuthenticityScore >= 66;
+  // Separate a click (open profile) from a drag (move card). framer-motion only
+  // fires onDragStart once its 3px threshold is crossed, so a plain tap never
+  // sets this — and any click that lands after a real drag is swallowed.
+  const draggedRef = useRef(false);
   return (
     <motion.div
       layout={!reduce}
@@ -381,11 +441,19 @@ function CandidateCard({
       dragSnapToOrigin
       dragElastic={0.16}
       whileDrag={{ scale: 1.04, zIndex: 50, cursor: "grabbing" }}
-      onDragStart={onDragStart}
+      onPointerDownCapture={() => (draggedRef.current = false)}
+      onDragStart={() => {
+        draggedRef.current = true;
+        onDragStart();
+      }}
       onDragEnd={(_, info) => onDragEnd(info.point)}
+      onClick={() => {
+        if (!draggedRef.current) onOpen();
+      }}
       transition={{ layout: { type: "spring", stiffness: 520, damping: 42 } }}
+      title="Click to view profile · drag to move"
       className={cn(
-        "relative cursor-grab touch-none select-none rounded-xl border bg-canvas p-2.5",
+        "relative cursor-pointer touch-none select-none rounded-xl border bg-canvas p-2.5 transition-colors hover:border-accent/60",
         contested ? "border-auth-amber/70" : "border-hairline",
         dragging && "shadow-ambient"
       )}
