@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { motion, useReducedMotion, LayoutGroup } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-motion";
 import { Gem, ChevronRight, Check, Star, ArrowLeft, SlidersHorizontal } from "lucide-react";
 import {
   getStartup,
@@ -10,6 +10,7 @@ import {
 import type { RankedMatch, ShortlistStatus } from "@/data/types";
 import { ScoreDial } from "@/components/score-dial";
 import { AuthenticityBadge } from "@/components/authenticity-badge";
+import { CandidateDrawer } from "@/components/candidate-drawer";
 import { cn } from "@/lib/utils";
 
 /* ---------------------------------------------------------------------------
@@ -82,6 +83,11 @@ export default function MatchPool() {
 
   const gemCount = matches.filter((m) => m.isHiddenGem).length;
   const shortlistedCount = matches.filter((m) => m.shortlistStatus === "shortlisted").length;
+
+  // The drawer reads the *live* match from state (so its shortlist toggle
+  // stays in sync with the row). Rank reflects position in the current view.
+  const selectedMatch = selectedId ? matches.find((m) => m.id === selectedId) ?? null : null;
+  const selectedRank = selectedMatch ? rows.findIndex((m) => m.id === selectedMatch.id) + 1 : 0;
 
   if (!startup) {
     return (
@@ -176,19 +182,19 @@ export default function MatchPool() {
         <span />
       </div>
 
-      {/* list */}
-      {loading ? (
-        <div className="flex flex-col">
-          {[1, 0.92, 0.82, 0.7, 0.58, 0.45, 0.32].map((op, i) => (
-            <RowSkeleton key={i} opacity={op} />
-          ))}
-        </div>
-      ) : rows.length === 0 ? (
-        <div className="py-16 text-center text-body text-secondary">
-          No candidates match these filters.
-        </div>
-      ) : (
-        <LayoutGroup>
+      {/* list + drawer share one LayoutGroup so the ScoreDial can morph */}
+      <LayoutGroup>
+        {loading ? (
+          <div className="flex flex-col">
+            {[1, 0.92, 0.82, 0.7, 0.58, 0.45, 0.32].map((op, i) => (
+              <RowSkeleton key={i} opacity={op} />
+            ))}
+          </div>
+        ) : rows.length === 0 ? (
+          <div className="py-16 text-center text-body text-secondary">
+            No candidates match these filters.
+          </div>
+        ) : (
           <div className="flex flex-col">
             {rows.map((m, i) => (
               <CandidateRow
@@ -203,8 +209,22 @@ export default function MatchPool() {
               />
             ))}
           </div>
-        </LayoutGroup>
-      )}
+        )}
+
+        <AnimatePresence>
+          {selectedMatch && (
+            <CandidateDrawer
+              key={selectedMatch.id}
+              match={selectedMatch}
+              startup={startup}
+              rank={selectedRank}
+              total={matches.length}
+              onClose={() => setSelectedId(null)}
+              onToggleShortlist={() => toggleShortlist(selectedMatch)}
+            />
+          )}
+        </AnimatePresence>
+      </LayoutGroup>
     </div>
   );
 }
@@ -264,8 +284,10 @@ function CandidateRow({
           {String(rank).padStart(2, "0")}
         </span>
 
-        {/* dial */}
-        <ScoreDial value={match.fitScore} size={44} strokeWidth={3.5} delay={index * STAGGER} />
+        {/* dial — shared element that morphs into the drawer */}
+        <motion.div layoutId={reduce ? undefined : `dial-${match.id}`} className="w-fit">
+          <ScoreDial value={match.fitScore} size={44} strokeWidth={3.5} delay={index * STAGGER} />
+        </motion.div>
 
         {/* candidate */}
         <div className="flex min-w-0 flex-col gap-1">
